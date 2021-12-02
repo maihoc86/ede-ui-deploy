@@ -613,7 +613,7 @@ export class CheckoutComponent implements OnChanges {
         'Content-Length': Buffer.byteLength(requestBody),
       },
     };
-    console.log(options);
+    console.log("Thai học -------------------------");
     this.paymentSystemService.getQrCodeMomo(options.headers).subscribe(
       (res: any) => {
         console.log(`Status: ${res.statusCode}`);
