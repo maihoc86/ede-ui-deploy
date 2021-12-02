@@ -582,12 +582,7 @@ export class CheckoutComponent implements OnChanges {
       requestId +
       '&requestType=' +
       requestType;
-    //puts raw signature
-    console.log('--------------------RAW SIGNATURE----------------');
-    console.log(rawSignature);
     var signature = CryptoJS.HmacSHA256(rawSignature, secretkey);
-    console.log('--------------------SIGNATURE----------------');
-    console.log(signature);
     //json object send to MoMo endpoint
     const requestBody = JSON.stringify({
       partnerCode: partnerCode,
@@ -613,7 +608,6 @@ export class CheckoutComponent implements OnChanges {
         'Content-Length': Buffer.byteLength(requestBody),
       },
     };
-    console.log("Thai học -------------------------");
     this.paymentSystemService.getQrCodeMomo(options.headers).subscribe(
       (res: any) => {
         console.log(`Status: ${res.statusCode}`);
