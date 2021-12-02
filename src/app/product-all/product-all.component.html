@@ -1,0 +1,395 @@
+<div class="col-sm-2">
+  <app-aside-shop></app-aside-shop>
+</div>
+<div class="col-sm-10" style="margin-top: 70px;">
+  <div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">Tất cả</a></li>
+      <li><a data-toggle="tab" href="#menu1" (click)="filterEnableTrue()">Đang được bán</a></li>
+      <li><a data-toggle="tab" href="#menu3" (click)="filterEnableFalse()">Đã ẩn</a></li>
+      <li><a data-toggle="tab" href="#menu2" (click)="filterQuantity0()">Hết hàng</a></li>
+     
+    </ul>
+
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+        <div class="main-container container">
+
+
+          <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-12">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                        <div class="position-relative">
+                          <input   type="text" class="form-control"
+                            placeholder="Search..." name="keywordProductAll" id="keywordProductAll" #keywordProductAll>
+
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-md-6">
+                      <input (click)= "searchProductAll(keywordProductAll.value)"  type="submit" class="btn btn-danger" value="Tìm"
+                        style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                      &nbsp;
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-6" style="margin-top: 16px;">
+                  <select (change)="changeSize($event)" name="cars" id="cars" style="width: 200px; height: 30px;">
+                    <option hidden>Show</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                  </select>
+                </div> -->
+              </div><br>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h3>
+                    <span>{{p*page.size > page.totalElements ? page.totalElements : page.size*p}}</span> /
+                    <span>{{page.totalElements}}</span> Sản phẩm
+                  </h3>
+                </div>
+                <div class="col-sm-6">
+                  <input style="margin-top: 5px;" type="submit" routerLink="/shop/product/manager" class="btn btn-danger" value="&#10010; Thêm 1 sản phẩm mớI">
+                </div>
+              </div>
+              <br>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td><strong>Tên</strong></td>
+                      <td><strong>Nhãn hàng</strong></td>
+                      <td><strong>Phân loại hàng</strong></td>
+                      <td><strong>Giá</strong></td>
+                      <td><strong>Số lượng</strong></td>
+                      <td><strong>Đã bán</strong></td>
+                      <td><strong>Sửa thông tin</strong></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let e of (page?.content || []) | paginate: { id: 'dau-tien', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements}">
+                      <td>{{e.name}}</td>
+                      <td>{{e.brand.name}}</td>
+                      <td>{{e.productOptions[0].display_name}}</td>
+                      <td>{{e.productOptions[0].price}}</td>
+                      <td>{{e.productOptions[0].quantity}}</td>
+                      <td>chưa có</td>
+                      <td><a (click)="showProductOption(e.idProduct)" data-toggle="modal" data-target="#exampleModal">Chi tiết</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls style="width: 100%;" (pageChange)="handlePageChange($event)" id="dau-tien"></pagination-controls>
+              </div>
+            </div>
+            <!--Middle Part End -->
+          </div>
+        </div>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+             <div class="col-sm-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                    <div class="position-relative">
+                      <input   type="text" class="form-control"
+                        placeholder="Search..." name="keywordEnableTrue" id="keywordEnableTrue" #keywordEnableTrue>
+
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-6">
+                  <input (click)= "searchEnableTrue(keywordEnableTrue.value)"  type="submit" class="btn btn-danger" value="Tìm"
+                    style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                  &nbsp;
+                </div>
+              </div>
+             </div>
+              <!-- <div class="col-sm-6" style="margin-top: 16px;">
+                <select (change)="changeSizeEnableTrue($event)" name="cars" id="cars"
+                  style="width: 200px; height: 30px;">
+                  <option hidden>Show</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                </select>
+              </div> -->
+            </div><br>
+            <div class="buttons clearfix">
+              <div class="pull-left" style="margin-left: 20px;">
+                <h3><span>{{pEnableTrue==pageEnableTrue.totalPages?pageEnableTrue.totalElements:pEnableTrue*size}}</span> /
+                  <span>{{pageEnableTrue.totalElements}}</span> Sản phẩm
+                </h3>
+              </div>
+            </div>
+            <br>
+
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên</strong></td>
+                    <td><strong>Nhãn hàng</strong></td>
+                    <td><strong>Phân loại hàng</strong></td>
+                    <td><strong>Giá</strong></td>
+                    <td><strong>Số lượng</strong></td>
+                    <td><strong>Đã bán</strong></td>
+                    <td><strong>Sửa thông tin</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsEnableTrue  | paginate: {itemsPerPage: sizeEnableTrue, currentPage: pEnableTrue, totalItems: countEnableTrue , id: 'second'}">
+                    <td>{{e.name}}</td>
+                      <td>{{e?.brand?.name}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.display_name}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.price}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.quantity}}</td>
+                      <td>chưa có</td>
+                      <td><a (click)="showProductOptionEnableTrue(e.idProduct)"  data-toggle="modal" data-target="#exampleModal"> Chi tiết</a></td>
+                    </tr>
+                </tbody>
+              </table>
+
+              <pagination-controls 
+                (pageChange)="handlePageChangeEnableTrue($event)"  id="second"></pagination-controls>
+
+            </div>
+          </div>
+          <!--Middle Part End -->
+
+        </div>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input   type="text" class="form-control"
+                          placeholder="Search..." name="keywordQty0" id="keywordQty0" #keywordQty0>
+
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)= "searchQty0(keywordQty0.value)"  type="submit" class="btn btn-danger" value="Tìm"
+                      style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-6" style="margin-top: 16px;">
+                <select (change)="changeSizeQuantity0($event)" name="cars" id="cars"
+                  style="width: 200px; height: 30px;">
+                  <option hidden>Show</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                </select>
+              </div> -->
+            </div><br>
+
+            <div class="buttons clearfix">
+              <div class="pull-left" style="margin-left: 20px;">
+                <h3>
+                  <span>{{pageQty0.totalElements == 0 ? 0 :pQty0==pageQty0.totalPages?pageQty0.totalElements
+                    :pQty0*5}}</span> /
+
+                  <span>{{pageQty0.totalElements}}</span>
+                  Sản phẩm
+                </h3>
+              </div>
+
+            </div>
+            <br>
+
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên</strong></td>
+                    <td><strong>Nhãn hàng</strong></td>
+                    <td><strong>Phân loại hàng</strong></td>
+                    <td><strong>Giá</strong></td>
+                    <td><strong>Số lượng</strong></td>
+                    <td><strong>Đã bán</strong></td>
+                    <td><strong>Sửa thông tin</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsQuantity0  | paginate: {itemsPerPage: sizeQuantity0, currentPage: pQty0, totalItems: countQty0, id: 'three' }">
+                    <td>{{e.product.name}}</td>
+                    <td>{{e.product.brand.name}}</td>
+                    <td>{{e.display_name}}</td>
+                    <td>{{e.price}}</td>
+                    <td>{{e.quantity}}</td>
+                    <td>chưa có</td>
+                    <td><a (click)="editProduct(e.id)">Sửa</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <pagination-controls *ngIf="pageQty0.totalElements>1" (pageChange)="handlePageChangeQty0($event)" id="three">
+
+              </pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+
+        </div>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input   type="text" class="form-control"
+                          placeholder="Search..." name="keywordEnableFalse" id="keywordEnableFalse" #keywordEnableFalse>
+  
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)= "searchEnableFalse(keywordEnableFalse.value)"  type="submit" class="btn btn-danger" value="Tìm"
+                      style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+               </div>
+              <!-- <div class="col-sm-6" style="margin-top: 16px;">
+                <select (change)="changeSizeEnableFalse($event)" name="cars" id="cars"
+                  style="width: 200px; height: 30px;">
+                  <option hidden>Show</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                </select>
+              </div> -->
+            </div><br>
+            <div class="buttons clearfix">
+              <div class="pull-left" style="margin-left: 20px;">
+                <h3><span>{{pEnableFalse==pageEnableFalse.totalPages ? page.totalElements : pEnableFalse*size}}</span> /
+                  <span>{{pageEnableFalse.totalElements}}</span> Sản phẩm
+                </h3>
+              </div>
+
+            </div>
+            <br>
+
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên</strong></td>
+                    <td><strong>Nhãn hàng</strong></td>
+                    <td><strong>Phân loại hàng</strong></td>
+                    <td><strong>Giá</strong></td>
+                    <td><strong>Số lượng</strong></td>
+                    <td><strong>Đã bán</strong></td>
+                    <td><strong>Sửa thông tin</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsEnableFalse  | paginate: {itemsPerPage: sizeEnableFalse, currentPage: pEnableFalse, totalItems: countEnableFalse ,id: 'four'}">
+                    <td>{{e.name}}</td>
+                      <td>{{e?.brand?.name}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.display_name}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.price}}</td>
+                      <td>{{(e?.productOptions || [])[0]?.quantity}}</td>
+                      <td>chưa có</td>
+                      <td><a (click)="showProductOptionEnableFalse(e.idProduct)"  data-toggle="modal" data-target="#exampleModal"> Chi tiết</a></td>
+                    </tr>
+                </tbody>
+              </table>
+
+              <pagination-controls *ngIf="pageEnableFalse.totalElements>1"
+                (pageChange)="handlePageChangeEnableFalse($event)" id="four"></pagination-controls>
+
+            </div>
+          </div>
+          <!--Middle Part End -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Modal -->
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Chi tiết các loại của sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>Hình ảnh</td>
+                <td><strong>Tên loại</strong></td>
+                <td><strong>Nhãn hàng</strong></td>
+                <td><strong>Giá</strong></td>
+                <td><strong>Số lượng</strong></td>
+                <td><strong>Đã bán</strong></td>
+                <td><strong>Hành động</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listProductOption">
+                <td>ảnh
+                  <!-- <img src="http://localhost:8080/ede-file/get/image/idProductOption/{{e.productOption.id}}"
+                    width="50" height="50"> -->
+                </td>
+                <td>{{item.display_name}}</td>
+                <td>{{item.product.brand.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{true}}</td>
+                <td><a href="http://localhost:4200/shop/product/manager/{{item.id}}">Sửa thông tin</a></td>
+              </tr>
+            </tbody>
+            </table>
+          <pagination-controls id="detail"></pagination-controls>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>

@@ -1,0 +1,40 @@
+<div class="product-item-container" style="border: 1px solid #ccf; box-shadow: 0 0 .25em #ccc;">
+    <div class="left-block">
+        <div class="product-image-container second_img">
+            <a [routerLink]="['/product/detail', product.idProduct]" target="_self" title="{{product.name}}">
+                <img [src]="'http://localhost:8080/ede-file/get/image/'+product.optionDef.optionImageDef.image" class="img-1 img-responsive" alt="{{product.name}}" style="height: 12em; object-fit: contain; background-color: #fff;">
+                <img [src]="'http://localhost:8080/ede-file/get/image/'+product.optionDef.optionImageDef.image" class="img-2 img-responsive" alt="{{product.name}}" style="height: 12em; object-fit: cover; background-color: #f2f2f2;">
+            </a>
+        </div>
+        <div class="box-label"> <span class="label-product label-sale"> -16% </span></div>
+        <div class="button-group so-quickview cartinfo--left">
+            <button type="button" class="addToCart btn-button" title="Add to cart" onclick="alert('Chờ phiên bản sau: mã search: product-search-element.component.html: tn01')">  <i class="fa fa-shopping-basket"></i>
+                <span>Add to cart </span>
+            </button>
+            <button type="button" class="wishlist btn-button" title="Add to Wish List"  onclick="alert('Chờ phiên bản sau: mã search: product-search-element.component.html: tn02')"><i class="fa fa-heart"></i><span>Add to Wish List</span>
+            </button>
+            <button type="button" class="compare btn-button" title="Compare this Product "  onclick="alert('Chờ phiên bản sau: mã search: product-search-element.component.html: tn03')"><i class="fa fa-refresh"></i><span>Compare this Product</span>
+            </button>
+            <!--quickview-->                                                      
+            <a class="iframe-link btn-button quickview quickview_handler visible-lg" [routerLink]="['/product/detail', product.idProduct]" title="Quick view" data-fancybox-type="iframe">
+                <i class="fa fa-eye"></i><span>Quick view</span>
+            </a>                                                        
+            <!--end quickview-->
+        </div>
+    </div>
+    <div class="right-block">
+        <div class="caption">
+            <div class="price"> 
+                <span class="price-old">{{product.optionDef.price | number: '0.0-0'}}₫</span>
+                <br/>
+                <span class="price-new">{{product.optionDef.price | number: '0.0-0'}}₫</span>
+            </div>
+            <h4 style="height: 2.5em;">
+                <a  style="height: 100%; display: block;" title="{{product.name}}" target="_self" [routerLink]="['/product/detail', product.idProduct]">
+                {{product.name}}
+                </a>
+            </h4>
+            
+        </div>
+    </div>
+</div>

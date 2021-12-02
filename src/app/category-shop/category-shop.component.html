@@ -1,0 +1,132 @@
+<div class="col-sm-2">
+    <app-aside-shop></app-aside-shop>
+</div>
+<div class="col-sm-10" style="margin-top: 70px;">
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Tất cả</a></li>
+            <li *ngFor="let item of listParentCategory"><a data-toggle="tab" [href]="'#'+item.id">{{item.name}}</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="main-container container">
+                    <div class="row">
+                        <!--Middle Part Start-->
+                        <div id="content" class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Search..."
+                                                        name="keywordProductAll" id="keywordProductAll"
+                                                        #keywordProductAll>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="submit" class="btn btn-danger" value="Tìm"
+                                                style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><br>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <input style="margin-top: 5px;" type="submit" routerLink="/shop/product/manager"
+                                        class="btn btn-danger" value="&#10010; Thêm 1 sản phẩm mớI">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Tên</strong></td>
+                                            <td><strong>Danh mục cha</strong></td>
+                                            <td><strong>Hình</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of listAllCategory | paginate: { itemsPerPage: 5, currentPage: p,id:'all' }">
+                                            <td>{{item.parentcategory.name}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td><img src="" alt="" ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event" id="all"></pagination-controls>
+                            </div>
+                        </div>
+                        <!--Middle Part End -->
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let item of listParentCategory" id="{{item.id}}" class="tab-pane fade">
+                <div class="row">
+                    <!--Middle Part Start-->
+                    <div id="content" class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Search..."
+                                                    name="keywordEnableTrue" id="keywordEnableTrue" #keywordEnableTrue>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="submit" class="btn btn-danger" value="Tìm"
+                                            style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="margin-top: 16px;">
+
+                            </div>
+                        </div><br>
+                        <div class="buttons clearfix">
+                            <div class="pull-left" style="margin-left: 20px;">
+
+                            </div>
+                        </div>
+                        <br>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><strong>Tên</strong></td>
+                                        <td><strong>Danh mục cha</strong></td>
+                                        <td><strong>Hình</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let i of listAllCategory"> 
+                                    <tr *ngIf="i.parentcategory.parentcategory.id==item.id">
+                                        <td>{{i.parentcategory.name}}</td>
+                                        <td >{{i.name}}</td>
+                                        <td><img src="$" alt="" ></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--Middle Part End -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

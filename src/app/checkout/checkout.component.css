@@ -1,0 +1,15 @@
+.content-bank {
+  padding-top: 5px;
+  border: 1px solid #ccc;
+}
+.content-bank span {
+  padding: 3px;
+}
+.content-bank .span-main {
+  font-weight: bold;
+}
+.content-bank .noidung {
+  /* font-weight: bold;
+  font-style: italic; */
+  color: #ec1e00;
+}

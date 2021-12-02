@@ -1,0 +1,318 @@
+<div class="container" id="table">
+  <div class="col-sm-2">
+    <aside class="content-aside" id="column-left">
+      <ul class="breadcrumb">
+        <li style="width: 300px">
+          <a routerLink="/shop/interface"
+            ><i class="glyphicon glyphicon-chevron-left"></i> TRỞ LẠI TRANG CỦA
+            SHOP</a
+          >
+        </li>
+      </ul>
+      <ul class="list-group">
+        <form action="" [formGroup]="shopForm">
+          <li class="list-group-item" style="color: white; text-align: center">
+            <div
+              [ngStyle]="{
+                'background-image':
+                  'url(' +
+                  'http://localhost:8080/ede-file/get/image/' +
+                  this.shopForm.controls.image_sub.value +
+                  ')'
+              }"
+            >
+              <img
+                src="http://localhost:8080/ede-file/get/image/{{
+                  this.shopForm.controls.image.value
+                }}"
+                style="width: 50px; height: 50px; margin-top: 20px"
+              />
+              <h5>
+                {{ this.shopForm.controls.name.value }}
+              </h5>
+              <h6>Online 10 phút trước</h6>
+              <br />
+            </div>
+          </li>
+        </form>
+        <li class="list-group-item title">Danh mục shop</li>
+        <li class="list-group-item">
+          <a
+            href="http://localhost:4200/shop/showall/interface?idShop={{
+              shopForm.controls.id.value
+            }}"
+            >Tất cả</a
+          >
+        </li>
+        <li
+          class="list-group-item target hover"
+          *ngFor="let item of listCategories"
+          [value]="item.name"
+        >
+          <a class="clearfix">
+            <span (click)="clickFilterCategory(item.id)">{{ item.name }}</span>
+          </a>
+        </li>
+        <br /><br />
+        <li class="list-group-item title">Nơi bán</li>
+        <li
+          class="list-group-item target hover hover"
+          *ngFor="let item of listCities.slice(0, 4)"
+          [value]="item.name"
+        >
+          <a class="clearfix">
+            <input
+              type="checkbox"
+              [checked]="location.indexOf(item.name) > -1"
+              (change)="clickFilterLocation($event, item.name)"
+            />&nbsp;
+            <span>{{ item.name }}</span>
+          </a>
+        </li>
+        <li class="list-group-item target" *ngIf="hiddenShowLocationMore">
+          <span (click)="showHiddenLocation()">Thêm</span>
+        </li>
+        <div *ngIf="!hiddenLocation">
+          <li
+            class="list-group-item target hover"
+            *ngFor="let item of listCities.slice(4)"
+            [value]="item.name"
+          >
+            <a class="clearfix">
+              <input
+                type="checkbox"
+                [checked]="location.indexOf(item.name) > -1"
+                (change)="clickFilterLocation($event, item.name)"
+              />&nbsp;
+              <span>{{ item.name }}</span>
+            </a>
+          </li>
+        </div>
+        <br /><br />
+        <li class="list-group-item title">Nhãn hàng</li>
+        <li
+          class="list-group-item target hover hover"
+          *ngFor="let item of listBrands; let i = index"
+          [value]="item.id"
+        >
+          <a class="clearfix">
+            <input
+              type="checkbox"
+              [checked]="brand.indexOf(item.id) > -1"
+              (change)="clickFilterBrand($event, item.id)"
+            />&nbsp;
+            <span>{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+  <div class="col-sm-10" style="margin-top: 44px">
+    <div
+      class="product-filter product-filter-top filters-panel"
+      style="
+        background-color: rgb(223, 223, 223);
+        height: 60px;
+        padding-top: 14px;
+        padding-left: 20px;
+      "
+    >
+      Sắp xếp theo
+
+      <button
+        style="margin-left: 10px"
+        [ngClass]="
+          sortBy == 'evaluate' ? 'btn btn-default active' : 'btn btn-default'
+        "
+        (click)="sortProduct('evaluate')"
+      >
+        Yêu thích
+      </button>
+      <button
+        style="margin-left: 10px"
+        [ngClass]="
+          sortBy == 'ctime' ? 'btn btn-default active' : 'btn btn-default'
+        "
+        (click)="sortProduct('ctime')"
+      >
+        Mới nhất
+      </button>
+      <button
+        style="margin-left: 10px"
+        [ngClass]="
+          sortBy == 'discount' ? 'btn btn-default active' : 'btn btn-default'
+        "
+        (click)="sortProduct('discount')"
+      >
+        Giảm giá
+      </button>
+      &nbsp;&nbsp;
+      <select
+        style="width: 200px; height: 30px"
+        (change)="sortPriceProduct($event)"
+      >
+        <option hidden [selected]="sortBy == ''">Giá</option>
+        <option value="ASC" [selected]="sortBy == 'ASC'">
+          Giá: Thấp đến cao
+        </option>
+        <option value="DESC" [selected]="sortBy == 'DESC'">
+          Giá: Cao đến thấp
+        </option>
+      </select>
+    </div>
+    <!-------------------------------------------------------------------------------------------------- -->
+    <!--changed listings-->
+    <div class="related titleLine products-list grid module">
+      <div *ngIf="loadingProductTable">
+        <div class="loader4"></div>
+      </div>
+
+      <div *ngIf="listAllProducts.length > 0">
+        <div
+          class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12"
+          *ngFor="
+            let product of listAllProducts
+              | paginate
+                : { itemsPerPage: 10, currentPage: p, totalItems: count };
+            let i = index
+          "
+        >
+          <div *ngIf="count > 0">
+            <div class="product-item-container" style="height: 260px">
+              <div class="left-block">
+                <div
+                  class="product-image-container second_img"
+                  style="height: 150px"
+                  (click)="showDetailProduct(product.idProduct)"
+                >
+                  <a target="_self" title="Chicken swinesha">
+                    <img
+                      src="http://localhost:8080/ede-file/get/image/{{
+                        product.optionDef.optionImageDef.image
+                      }}"
+                      class="img-1 img-responsive"
+                      alt="image"
+                    />
+                    <img
+                      src="http://localhost:8080/ede-file/get/image/{{
+                        product.optionDef.optionImageDef.image
+                      }}"
+                      class="img-2 img-responsive"
+                      alt="image"
+                    />
+                  </a>
+                </div>
+
+                <div class="box-label">
+                  <span
+                    class="label-product label-sale"
+                    *ngIf="product.optionDef.productDiscount[0] != undefined"
+                  >
+                    -{{ product.optionDef.productDiscount[0].discount }}%
+                  </span>
+                </div>
+
+              </div>
+              <div class="right-block">
+                <div class="caption">
+                  <div class="rating">
+                    <span class="fa fa-stack"
+                      ><i class="fa fa-star-o fa-stack-2x"></i
+                    ></span>
+                    <span class="fa fa-stack"
+                      ><i class="fa fa-star-o fa-stack-2x"></i
+                    ></span>
+                    <span class="fa fa-stack"
+                      ><i class="fa fa-star-o fa-stack-2x"></i
+                    ></span>
+                    <span class="fa fa-stack"
+                      ><i class="fa fa-star-o fa-stack-2x"></i
+                    ></span>
+                    <span class="fa fa-stack"
+                      ><i class="fa fa-star-o fa-stack-2x"></i
+                    ></span>
+                  </div>
+                  <h4>
+                    <a
+                      href="product.html"
+                      title="Chicken swinesha"
+                      target="_self"
+                    ></a>
+                    {{ product.name }}
+                  </h4>
+                  <div class="price">
+                    <div
+                      *ngIf="product.optionDef.productDiscount[0] != undefined"
+                    >
+                      <span class="price-new"
+                        >{{
+                          (product.optionDef.price *
+                            (100 -
+                              product.optionDef.productDiscount[0].discount)) /
+                            100 | number
+                        }}đ</span
+                      >
+                      <span class="price-old"
+                        >{{ product.optionDef.price | number }}đ</span
+                      >
+                    </div>
+                    <span
+                      class="price-new"
+                      *ngIf="product.optionDef.productDiscount[0] == undefined"
+                      >{{ product.optionDef.price | number }}đ</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="listAllProducts.length == 0">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body cart">
+              <div class="col-sm-12 empty-cart-cls text-center">
+                <img
+                  src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+                  width="130"
+                  height="130"
+                  class="img-fluid mb-4 mr-3"
+                />
+                <h3>
+                  <strong
+                    >Hix. Không có sản phẩm nào. Bạn thử tắt điều kiện lọc và
+                    tìm lại nhé?</strong
+                  >
+                </h3>
+                <h4>hoặc</h4>
+                <span class="input-group-btn">
+                  <a
+                    href="http://localhost:4200/shop/showall/interface?idShop={{
+                      shopForm.controls.id.value
+                    }}"
+                  >
+                    <button
+                      type="submit"
+                      class="button-search btn btn-danger"
+                      name="submit_search"
+                    >
+                      <i class="fa fa-trash"></i> Xóa bộ lọc
+                    </button>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// End Changed listings-->
+    <div class="col-sm-12" *ngIf="listAllProducts.length > 0">
+      <pagination-controls
+        (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>

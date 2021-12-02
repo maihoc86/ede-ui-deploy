@@ -1,0 +1,203 @@
+<footer class="footer-container typefooter-1">
+  <!-- Footer Top Container -->
+  <section class="footer-top">
+    <div class="container ftop">
+      <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
+
+          <div class="module newsletter-footer1">
+            <div class="newsletter" style="width:100%   ; background-color: #fff ; ">
+
+              <div class="title-block">
+                <div class="page-heading font-title">
+                  Đăng ký để nhận tin mới nhất
+                </div>
+                <div class="promotext">Chúng tôi sẽ không bao giờ chia sẻ địa chỉ email của bạn với bên thứ ba. </div>
+              </div>
+
+              <div class="block_content">
+                <form [formGroup]="subscribe" class="form-group form-inline signup send-mail">
+                  <div class="form-group">
+                    <div class="input-box">
+                      <input type="email" placeholder="Địa chỉ Email của bạn..." class="form-control"
+                        formControlName="email" id="txtemail" name="txtemail" required>
+                      <div *ngIf="
+                              subscribe.controls['email'].invalid &&
+                              (subscribe.controls['email'].dirty ||
+                                subscribe.controls['email'].touched)
+                            " class="alert alert-danger">
+                        <span *ngIf="
+                              subscribe.controls['email'].errors &&
+                              subscribe.controls['email'].errors.required
+                            ">Email là bắt buộc.</span>
+                        <span *ngIf="
+                              subscribe.controls['email'].errors &&
+                              subscribe.controls['email'].errors.email
+                            ">Email không đúng định dạng.</span>
+                      </div>
+                    </div>
+                    <div class="subcribe">
+                      <button class="btn btn-primary btn-default font-title"
+                        [disabled]="subscribe.invalid ? 'disabled': null" (click)="subscribe_newsletter();"
+                        name="submit">
+                        Đăng ký
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+
+              </div>
+              <!--/.modcontent-->
+
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
+          <ul class="socials">
+            <li class="facebook"><a class="_blank" href="https://www.facebook.com/MagenTech" target="_blank"><i
+                  class="fa fa-facebook"></i><span>Facebook</span></a></li>
+            <li class="twitter"><a class="_blank" href="https://twitter.com/smartaddons" target="_blank"><i
+                  class="fa fa-twitter"></i><span>Twitter</span></a></li>
+            <li class="google_plus"><a class="_blank" href="https://plus.google.com/u/0/+Smartaddons/posts"
+                target="_blank"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
+            <li class="pinterest"><a class="_blank" href="https://www.pinterest.com/smartaddons/" target="_blank"><i
+                  class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+          </ul>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /Footer Top Container -->
+
+  <div class="footer-middle ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-style">
+          <div class="infos-footer">
+            <a href="#"><img src="/assets/image/catalog/logo-footer.png" alt="image"></a>
+            <ul class="menu">
+              <li class="adres">
+                326B Nguyen Van Linh, An Khanh, Ninh Kieu, Can Tho, Viet Nam
+              </li>
+              <li class="phone">
+                (+84) 798 089 717
+              </li>
+              <li class="mail">
+                <a href="mailto:teamsdarkeyes2021@gmail.com">teamsdarkeyes2021@gmail.com</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 col-style">
+          <div class="box-information box-footer">
+            <div class="module clearfix">
+              <h3 class="modtitle">Thông tin</h3>
+              <div class="modcontent">
+                <ul class="menu">
+                  <li><a href="#">Về chúng tôi</a></li>
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">Bảo hành và Dịch vụ</a></li>
+                  <li><a href="#">Trang hỗ trợ 24/7</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 col-style">
+          <div class="box-account box-footer">
+            <div class="module clearfix">
+              <h3 class="modtitle">Tài khoản</h3>
+              <div class="modcontent">
+                <ul class="menu">
+                  <li><a href="#" [routerLink]="['/user/account']">Tài khoản của tôi</a></li>
+                  <li><a href="#" [routerLink]="['/user/order']">Đơn mua</a></li>
+                  <li><a href="#" [routerLink]="['/shop/product/all']">Kênh người bán</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 col-style">
+          <div class="box-service box-footer">
+            <div class="module clearfix">
+              <h3 class="modtitle">Dịch vụ</h3>
+              <div class="modcontent">
+                <ul class="menu">
+                  <li><a href="#" [routerLink]="['/contact']">Liên hệ</a></li>
+                  <li><a href="#" [routerLink]="['/contact']">Hỗ trợ</a></li>
+                  <li><a href="#" [routerLink]="['/contact']">Bản đồ địa chỉ cửa hàng</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 col-style">
+          <div class="module box-footer so-instagram-gallery-ltr">
+            <div class="module clearfix">
+              <h3 class="modtitle">Sản phẩm</h3>
+              <div class="modcontent">
+                <ul class="menu">
+                  <li><a href="#">Tất cả</a></li>
+                  <li><a href="#">Nổi bật</a></li>
+                  <li><a href="#">Giảm giá</a></li>
+                  <li><a href="#">Mới nhất</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-style">
+          <ul class="footer-links font-title">
+            <li><a href="#" [routerLink]="['/']">Trang chủ</a></li>
+            <li><a href="#">Về chúng tôi</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Bảo hành và Dịch vụ</a></li>
+            <li><a href="#">Trang hỗ trợ 24/7</a></li>
+            <li><a href="#" [routerLink]="['/user/account']">Tài khoản của tôi</a></li>
+            <li><a href="#" [routerLink]="['/user/order']">Đơn mua</a></li>
+            <li><a href="#" [routerLink]="['/shop/product/all']">Kênh người bán</a></li>
+            <li><a href="#" [routerLink]="['/contact']">Liên hệ</a></li>
+            <li><a href="#" [routerLink]="['/contact']">Hỗ trợ</a></li>
+            <li><a href="#">Bản đồ địa chỉ cửa hàng</a></li>
+            <li><a href="#" [routerLink]="['/']">Tất cả</a></li>
+            <li><a href="#" [routerLink]="['/']">Nổi bật</a></li>
+            <li><a href="#" [routerLink]="['/']">Giảm giá</a></li>
+            <li><a href="#" [routerLink]="['/']">Mới nhất</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-12 col-xs-12 text-center">
+          <img src="http://localhost:4200/assets/image/catalog/logo-footer.png" alt="imgpayment">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom Container -->
+  <div class="footer-bottom ">
+    <div class="container">
+      <div class="copyright">
+        EDE © 2021 Sàn thương mại điện tử. Đã đăng ký bản quyền. Thiết kể bởi <a href="http://www.ede-commerce.com/"
+          target="_blank">ede-commerce</a>
+      </div>
+    </div>
+  </div>
+  <!-- /Footer Bottom Container -->
+
+  <!--Back To Top-->
+  <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+  <!--Back To Top-->
+  <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+</footer>
+<!-- //end Footer Container -->

@@ -1,0 +1,64 @@
+<div style="background-color: #f5f5f5; height: '110%'; width: '100%';">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">
+    <app-aside-user></app-aside-user>
+  </div>
+  <div class="col-sm-8"
+    style="background-color: #fff; margin-top: 20px;  border-radius: 3px;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+    <h3>Hồ Sơ Của Tôi</h3>
+    <h4>Quản lý thông tin hồ sơ để bảo mật tài khoản</h4>
+    <hr>
+    <div class="row">
+      <div class="col-sm-7">
+        <table class="table" style="margin-left: 30px; ">
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Tên đăng nhập</td>
+            <td>{{userAcc.username}}</td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Tên</td>
+            <td><input type="text" class="form-control" [value]='userAcc.first_name+" "+userAcc.last_name'></td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Email</td>
+            <td>{{ mask(userAcc.email, 12)}} <a href="/user/update/email"><u style="color: blue;">Thay đổi</u></a></td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Số điện thoại</td>
+            <td><input type="text" class="form-control" [value]='mask(userAcc.phone)'></td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Tên shop</td>
+            <td><input type="text" class="form-control" [value]="shop.name"></td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td style="color: #999;">Giới tính</td>
+            <td>
+              <label class="radio-inline"><input type="radio" name="optradio"
+                  [checked]='userAcc.gender == "M"? true:false'>Nam</label>
+              <label class="radio-inline"><input type="radio" name="optradio"
+                  [checked]='userAcc.gender == "W"? true:false'>Nữ</label>
+              <label class="radio-inline"><input type="radio" name="optradio"
+                  [checked]='userAcc.gender != "M" && userAcc.gender != "W"  ? true:false'>Khác</label>
+            </td>
+          </tr>
+          <tr style=" height: 70px;">
+            <td colspan="2" align="center">
+              <input type="submit" class="btn btn-danger" value="Lưu"
+                style="border-radius:3px 3px; width: 85px; height: 43px;margin-bottom: 80px; ">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-5" align="center">
+        <img style="border: 1px #d4d4d4 solid; border-radius:50%; width:150px;height:150px; "
+          src="https://upanh123.com/wp-content/uploads/2021/02/hinh-anh-hoc-sinh-cap-3-820x1024.png">
+        <br>
+        <input type="submit" class="btn btn-danger" value="Chọn ảnh"
+          style="border-radius:3px 3px; width: 100px; height: 45px;margin-top: 20px;margin-bottom: 20px; ">
+        <p style="color: #999;"> Dụng lượng file tối đa 1 MB</p>
+        <p style="color: #999;"> Định dạng:.JPEG, .PNG</p>
+      </div>
+    </div>
+  </div>
+</div>

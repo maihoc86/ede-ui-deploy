@@ -1,0 +1,82 @@
+<body class="common-home res layout-1">
+
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <div id="content">
+            <div class="row">
+                
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 main-left sidebar-offcanvas">
+                    Aside
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 main-right">
+                    <!-- Listing tabs custom -->
+                    <div class="module listingtab1-custom listingtab-layout1">
+                        <h3 class="modtitle"><span>Tất cả </span></h3>
+                        <div class="related titleLine products-list grid module">
+                            <div>
+                              <div *ngFor="let item of listProductAll | paginate
+                              : { itemsPerPage: 1, currentPage: page, totalItems: count }" class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                                <div class="product-item-container" style="height: 300px">
+                                  <div class="left-block">
+                                    <div class="product-image-container second_img" style="height: 150px"
+                                     >
+                                      <a target="_self" title="Chicken swinesha">
+                                        <img src="http://localhost:8080/ede-file/get/image/{{
+                                          item.optionDef.optionImageDef.image
+                                          }}" class="img-1 img-responsive" alt="image" />
+                                        <img src="http://localhost:8080/ede-file/get/image/{{
+                                            item.optionDef.optionImageDef.image
+                                          }}" class="img-2 img-responsive" alt="image" />
+                                      </a>
+                                    </div>
+                        
+                                    <div class="box-label">
+                                      <span class="label-product label-sale" *ngIf="item.optionDef.productDiscount[0] != undefined">
+                                        {{ item.optionDef.productDiscount[0].discount }}%
+                                      </span>
+                                    </div>
+                              
+                                  </div>
+                                  <div class="right-block">
+                                    <div class="caption">
+                                      <div class="rating">
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                      </div>
+                                      <h4>
+                                        <a href="product.html" title="Chicken swinesha" target="_self"></a>
+                                        {{ item.name }}
+                                      </h4>
+                                      <div class="price">
+                                        <div *ngIf="item.optionDef.productDiscount[0] != undefined">
+                                          <span class="price-new">{{
+                                            (item.optionDef.price *
+                                            (100 - item.optionDef.productDiscount[0].discount)) /
+                                            100 | number
+                                            }}đ</span>
+                                          <span class="price-old">{{ item.optionDef.price | number }}đ</span>
+                                        </div>
+                                        <span class="price-new" *ngIf="item.optionDef.productDiscount[0] == undefined">{{ item.optionDef.price |
+                                          number }}đ</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12" >
+                                <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+                              </div>
+                        </div>
+                    </div>
+                    <!-- end Listing tabs custom -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- //Main Container -->
+    </body>

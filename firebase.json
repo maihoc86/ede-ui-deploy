@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/ede-ui-deploy",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "index.html",
+        "destination": "/index.html"
+      },
+      {
+        "source": "css/style.css",
+        "destination": "/css/style.css"
+      }
+    ]
+  }
+}

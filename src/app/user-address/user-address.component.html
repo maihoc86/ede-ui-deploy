@@ -1,0 +1,312 @@
+<div style="background-color: #f5f5f5; width:100%">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">
+    <app-aside-user></app-aside-user>
+  </div>
+  <div class="col-sm-8 content-address-main">
+    <div class="row">
+      <div class="col-sm-8" style="height: 70px; margin: auto; padding: 20px">
+        <h3>Địa Chỉ Của Tôi</h3>
+      </div>
+      <div class="col-sm-4" style="text-align: right; height: 70px; margin: auto; padding: 10px">
+        <button class="btn btn-danger btn-add-address" data-toggle="modal" data-target="#openModalAddress">
+          <i class="fa fa-plus"></i> Thêm Địa Chỉ Mới
+        </button>
+        <!--- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="openModalAddress" tabindex="-1" role="dialog"
+          aria-labelledby="openModalAddressLabel" aria-hidden="true">
+          <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h3 class="modal-title" id="openModalAddressLabel" style="text-align: left">
+                      Địa chỉ nhận hàng
+                    </h3>
+                  </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <br />
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="address">
+                  <div class="row">
+                    <div class="form-group required">
+                      <div class="col-sm-6">
+                        <label class="control-label">Họ</label>
+                        <input class="form-control" id="first_name" formControlName="first_name" type="text"
+                          placeholder="Họ">
+                        <div *ngIf="
+                              address.controls['first_name'].invalid &&
+                              (address.controls['first_name'].dirty ||
+                                address.controls['first_name'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['first_name'].errors &&
+                              address.controls['first_name'].errors.required
+                            ">Họ là bắt buộc.</span>
+                          <span *ngIf="
+                              address.controls['first_name'].errors &&
+                              address.controls['first_name'].errors.pattern
+                            ">Họ không đúng định dạng.</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="control-label">Tên</label>
+                        <input class="form-control" id="last_name" formControlName="last_name" type="text"
+                          placeholder="Tên">
+                        <div *ngIf="
+                              address.controls['last_name'].invalid &&
+                              (address.controls['last_name'].dirty ||
+                                address.controls['last_name'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['last_name'].errors &&
+                              address.controls['last_name'].errors.required
+                            ">Tên là bắt buộc.</span>
+                          <span *ngIf="
+                              address.controls['last_name'].errors &&
+                              address.controls['last_name'].errors.pattern
+                            ">Tên không đúng định dạng.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="form-group required">
+                      <div class="col-sm-12">
+                        <label class="control-label">Số điện thoại</label>
+                        <input class="form-control" id="phone" formControlName="phone" type="text"
+                          placeholder="Số điện thoại">
+                        <div *ngIf="
+                                address.controls['phone'].invalid &&
+                                (address.controls['phone'].dirty ||
+                                  address.controls['phone'].touched)
+                              " class="alert alert-danger">
+                          <span *ngIf="
+                                address.controls['phone'].errors &&
+                                address.controls['phone'].errors.required
+                              ">Số điện thoại là bắt buộc.</span>
+                          <span *ngIf="
+                                address.controls['phone'].errors &&
+                                address.controls['phone'].errors.pattern
+                              ">Số điện thoại không đúng định dạng.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="form-group required">
+                      <div class="col-sm-12">
+                        <!-- <div *ngIf="loadingAddress">
+                          <div class="loader4"></div>
+                        </div> -->
+                        <label class="control-label">Tỉnh / Thành</label>
+                        <select name="city_id" id="input-city" class="form-control" formControlName="city"
+                          (change)="chooseCity()">
+                          <option [ngValue]="null" hidden>
+                            --- Chọn tỉnh thành ---
+                          </option>
+                          <option *ngFor="let prf of listCitys" [ngValue]="prf">
+                            {{ prf.name }}
+                          </option>
+                        </select>
+                        <div *ngIf="
+                            address.controls['city'].invalid &&
+                            (address.controls['city'].dirty ||
+                              address.controls['city'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['city'].errors &&
+                              address.controls['city'].errors.required
+                            ">Tỉnh / thành là bắt buộc</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="form-group required">
+                      <div class="col-sm-6" *ngIf="!isHiddenDistrict">
+                        <label class="control-label">Quận / Huyện</label>
+                        <select name="district_id" id="input-district" class="form-control" formControlName="district"
+                          (change)="chooseDistrict()">
+                          <option [ngValue]="null" hidden>
+                            --- Chọn quận huyện ---
+                          </option>
+                          <option *ngFor="let prf of listDistricts" [ngValue]="prf">
+                            {{ prf.name }}
+                          </option>
+                        </select>
+                        <div *ngIf="
+                            address.controls['district'].invalid &&
+                            (address.controls['district'].dirty ||
+                              address.controls['district'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['district'].errors &&
+                              address.controls['district'].errors.required
+                            ">Tỉnh / thành là bắt buộc</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6" *ngIf="!isHiddenWards">
+                        <label class="control-label">Phường / Xã</label>
+                        <select name="wards_id" id="input-wards" class="form-control" formControlName="wards"
+                          (change)="chooseWards()">
+                          <option [ngValue]="null" hidden>
+                            --- Chọn phường xã ---
+                          </option>
+                          <option *ngFor="let prf of listWards" [ngValue]="prf">
+                            {{ prf.name }}
+                          </option>
+                        </select>
+                        <div *ngIf="
+                            address.controls['wards'].invalid &&
+                            (address.controls['wards'].dirty ||
+                              address.controls['wards'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['wards'].errors &&
+                              address.controls['wards'].errors.required
+                            ">Phường / xã là bắt buộc</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row" *ngIf="!isHiddenAddress">
+                    <div class="form-group required">
+                      <div class="col-sm-12">
+                        <label class="control-label">Địa chỉ cụ thể</label>
+                        <textarea class="form-control" name="" id="" cols="35" rows="4" placeholder="Địa chỉ cụ thể"
+                          formControlName="address"></textarea>
+                        <div *ngIf="
+                              address.controls['address'].invalid &&
+                              (address.controls['address'].dirty ||
+                                address.controls['address'].touched)
+                            " class="alert alert-danger">
+                          <span *ngIf="
+                              address.controls['address'].errors &&
+                              address.controls['address'].errors.required
+                            ">Địa chỉ là bắt buộc.</span>
+                          <span *ngIf="
+                              address.controls['address'].errors &&
+                              address.controls['address'].errors.pattern
+                            ">Địa chỉ không đúng định dạng.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group">
+                        <input type="checkbox" formControlName="main_address">
+                        <label>Đặt làm địa chỉ mặc định</label>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  TRỞ LẠI
+                </button>
+                <button type="submit" [disabled]="address.invalid ? 'disabled': null" class="btn btn-danger"
+                  (click)="updateAddressUser()">
+                  HOÀN THÀNH
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--- End Modal -->
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-12">
+        <table style="margin-left: 30px;">
+          <tr>
+            <td>
+          <tr>
+            <td class="td-right">Họ Và Tên</td>
+            <td class="td-left">
+              {{ address.controls.user.value.first_name }}
+              {{ address.controls.user.value.last_name }}
+              <div class="main-address">Mặc định</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-right">Số Điện Thoại</td>
+            <td class="td-left">{{ address.controls.user.value.phone }}</td>
+            <td class="td-right">
+              <button class="btn-transparent" data-toggle="modal" data-target="#openModalAddress"
+                (click)="showAddressUserModal(address.controls.user.value , null)">Sửa</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-right">Địa Chỉ</td>
+            <td class="td-left">
+              {{ address.controls.user.value.address }}
+            </td>
+            <td class="td-right">
+              <button class="btn btn-secondary" disabled>
+                Thiết Lập Mặc Định
+              </button>
+            </td>
+          </tr>
+
+          <hr *ngIf="listAddressUser.length > 0" />
+          </td>
+          </tr>
+
+          <tr *ngFor="let address of listAddressUser; let i = index">
+            <td>
+          <tr>
+            <td class="td-right">Họ Và Tên</td>
+            <td class="td-left">
+              {{ address.first_name }} {{ address.last_name }}
+              <div class="delivery-address">Địa chỉ lấy hàng</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-right">Số Điện Thoại</td>
+            <td class="td-left">{{address.phone}}</td>
+            <!-- TODO Thêm cột số điện thoại vào DB và Entity -->
+            <td class="td-right">
+              <button class="btn-transparent" data-toggle="modal" data-target="#openModalAddress"
+                (click)="showAddressUserModal(null , address)">Sửa</button>
+              <button class="btn-transparent" (click)="deleteAddress(address.id)">Xóa</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-right">Địa Chỉ</td>
+            <td class="td-left">
+              {{ address.address }}
+            </td>
+            <td class="td-right">
+              <button class="btn btn-secondary" (click)="setAddressMain(address)">Thiết Lập Mặc Định</button>
+            </td>
+          </tr>
+          <div *ngIf="i < listAddressUser.length - 1">
+            <hr />
+          </div>
+          </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{
+    backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+    backdropBorderRadius: '4px',
+    primaryColour: '#000000',
+    secondaryColour: '#000000',
+    tertiaryColour: '#000000',
+    fullScreenBackdrop:true
+ }"></ngx-loading>

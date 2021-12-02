@@ -1,0 +1,16 @@
+.so-popular-tag .box-content a:hover {
+  background-color: #ff3c20;
+}
+.so-popular-tag .box-content a {
+  font-size: 12px !important;
+  background-color: #eee;
+  color: #222;
+  display: inline-block;
+  float: left;
+  margin: 0 10px 10px 0;
+  padding: 5px 20px;
+  position: relative;
+  transition: all 0.2s ease 0s;
+  line-height: 100%;
+  border-radius: 15px;
+}

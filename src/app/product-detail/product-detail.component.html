@@ -1,0 +1,636 @@
+<body class="res layout-subpage layout-1 banners-effect-5">
+  <div id="wrapper" class="wrapper-fluid">
+    <!-- Main Container  -->
+    <div class="main-container container">
+      <ul class="breadcrumb">
+        <li><a routerLink="/"><i class="fa fa-home"></i></a></li>
+        <li><a>{{product?.childCategory?.parentcategory?.parentcategory?.name}}</a></li>
+        <li><a>{{product?.childCategory?.parentcategory?.name}}</a></li>
+        <li><a>{{product?.childCategory?.name}}</a></li>
+        <li><a [routerLink]="['/product/detail', product.idProduct]"
+            routerLinkActive="router-link-active">{{product?.name}}</a></li>
+
+      </ul>
+
+      <div class="row">
+
+        <!--Left Part Start -->
+        <aside class="col-sm-4 col-md-3 content-aside" id="column-left">
+          <div class="module category-style">
+            <h3 class="modtitle">Categories</h3>
+            <div class="modcontent">
+              <div class="box-category">
+                <ul id="cat_accordion" class="list-group">
+                  <li class="hadchild"><a href="category.html" class="cutom-parent">Smartphone & Tablets</a> <span
+                      class="button-view  fa fa-plus-square-o"></span>
+                    <ul style="display: block;">
+                      <li><a href="category.html">Men's Watches</a></li>
+                      <li><a href="category.html">Women's Watches</a></li>
+                      <li><a href="category.html">Kids' Watches</a></li>
+                      <li><a href="category.html">Accessories</a></li>
+                    </ul>
+                  </li>
+                  <li class="hadchild"><a class="cutom-parent" href="category.html">Electronics</a> <span
+                      class="button-view  fa fa-plus-square-o"></span>
+                    <ul style="display: none;">
+                      <li><a href="category.html">Cycling</a></li>
+                      <li><a href="category.html">Running</a></li>
+                      <li><a href="category.html">Swimming</a></li>
+                      <li><a href="category.html">Football</a></li>
+                      <li><a href="category.html">Golf</a></li>
+                      <li><a href="category.html">Windsurfing</a></li>
+                    </ul>
+                  </li>
+                  <li class="hadchild"><a href="category.html" class="cutom-parent">Shoes</a> <span
+                      class="button-view  fa fa-plus-square-o"></span>
+                    <ul style="display: none;">
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                    </ul>
+                  </li>
+                  <li class="hadchild"><a href="category.html" class="cutom-parent">Watches</a> <span
+                      class="button-view  fa fa-plus-square-o"></span>
+                    <ul style="display: none;">
+                      <li><a href="category.html">Men's Watches</a></li>
+                      <li><a href="category.html">Women's Watches</a></li>
+                      <li><a href="category.html">Kids' Watches</a></li>
+                      <li><a href="category.html">Accessories</a></li>
+                    </ul>
+                  </li>
+                  <li class="hadchild"><a href="category.html" class="cutom-parent">Jewellery</a> <span
+                      class="button-view  fa fa-plus-square-o"></span>
+                    <ul style="display: none;">
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                      <li><a href="category.html">Sub Categories</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a href="category.html" class="cutom-parent">Health &amp; Beauty</a> <span
+                      class="dcjq-icon"></span></li>
+                  <li class=""><a href="category.html" class="cutom-parent">Kids &amp; Babies</a> <span
+                      class="dcjq-icon"></span></li>
+                  <li class=""><a href="category.html" class="cutom-parent">Sports</a> <span class="dcjq-icon"></span>
+                  </li>
+                  <li class=""><a href="category.html" class="cutom-parent">Home &amp; Garden</a><span
+                      class="dcjq-icon"></span></li>
+                  <li class=""><a href="category.html" class="cutom-parent">Wines &amp; Spirits</a> <span
+                      class="dcjq-icon"></span></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="module product-simple">
+            <h3 class="modtitle">
+              <span>Latest products</span>
+            </h3>
+            <div class="modcontent">
+              <div class="extraslider">
+                <!-- Begin extraslider-inner -->
+                <div class=" extraslider-inner">
+                  <div class="item ">
+                    <div class="product-layout item-inner style1 ">
+                      <div class="item-image">
+                        <div class="item-img-info">
+                          <a href="#" target="_self" title="Mandouille short ">
+                            <img src="./../../assets/image/catalog/demo/product/80/8.jpg" alt="Mandouille short">
+                          </a>
+                        </div>
+
+                      </div>
+                      <div class="item-info">
+                        <div class="item-title">
+                          <a href="#" target="_self" title="Mandouille short">Mandouille short </a>
+                        </div>
+                        <div class="rating">
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                        </div>
+                        <div class="content_price price">
+                          <span class="price-new product-price">$55.00 </span>&nbsp;&nbsp;
+
+                          <span class="price-old">$76.00 </span>&nbsp;
+
+                        </div>
+                      </div>
+                      <!-- End item-info -->
+                      <!-- End item-wrap-inner -->
+                    </div>
+                    <!-- End item-wrap -->
+                    <div class="product-layout item-inner style1 ">
+                      <div class="item-image">
+                        <div class="item-img-info">
+                          <a href="#" target="_self" title="Xancetta bresao ">
+                            <img src="./../../assets/image/catalog/demo/product/80/7.jpg" alt="Xancetta bresao">
+                          </a>
+                        </div>
+
+                      </div>
+                      <div class="item-info">
+                        <div class="item-title">
+                          <a href="#" target="_self" title="Xancetta bresao">
+                            Xancetta bresao
+                          </a>
+                        </div>
+                        <div class="rating">
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                        </div>
+                        <div class="content_price price">
+                          <span class="price-new product-price">$80.00 </span>&nbsp;&nbsp;
+
+                          <span class="price-old">$89.00 </span>&nbsp;
+
+
+
+                        </div>
+                      </div>
+                      <!-- End item-info -->
+                      <!-- End item-wrap-inner -->
+                    </div>
+                    <!-- End item-wrap -->
+                    <div class="product-layout item-inner style1 ">
+                      <div class="item-image">
+                        <div class="item-img-info">
+                          <a href="#" target="_self" title="Sausage cowbee ">
+                            <img src="./../../assets/image/catalog/demo/product/80/6.jpg" alt="Sausage cowbee">
+                          </a>
+                        </div>
+
+                      </div>
+                      <div class="item-info">
+                        <div class="item-title">
+                          <a href="#" target="_self" title="Sausage cowbee">
+                            Sausage cowbee
+                          </a>
+                        </div>
+                        <div class="rating">
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                        </div>
+
+                        <div class="content_price price">
+                          <span class="price product-price">
+                            $66.00
+                          </span>
+                        </div>
+                      </div>
+                      <!-- End item-info -->
+                      <!-- End item-wrap-inner -->
+                    </div>
+                    <!-- End item-wrap -->
+                    <div class="product-layout item-inner style1 ">
+                      <div class="item-image">
+                        <div class="item-img-info">
+                          <a href="#" target="_self" title="{{product.name}} ">
+                            <img src="./../../assets/image/catalog/demo/product/80/5.jpg" alt="{{product.name}}">
+                          </a>
+                        </div>
+
+                      </div>
+                      <div class="item-info">
+                        <div class="item-title">
+                          <a href="#" target="_self" title="{{product.name}}">
+                            {{product.name}}
+                          </a>
+                        </div>
+                        <div class="rating">
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                        </div>
+                        <div class="content_price price">
+                          <span class="price-new product-price">$45.00 </span>&nbsp;&nbsp;
+
+                          <span class="price-old">$56.00 </span>&nbsp;
+
+
+
+                        </div>
+                      </div>
+                      <!-- End item-info -->
+                      <!-- End item-wrap-inner -->
+                    </div>
+                    <!-- End item-wrap -->
+                  </div>
+
+                </div>
+                <!--End extraslider-inner -->
+              </div>
+            </div>
+          </div>
+          <div class="module banner-left hidden-xs ">
+            <div class="banner-sidebar banners">
+              <div>
+                <a title="Banner Image" href="#">
+                  <img src="./../../assets/image/catalog/banners/banner-sidebar.jpg" alt="Banner Image">
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <!--Left Part End -->
+
+        <!--Middle Part Start-->
+        <div id="content" class="col-md-9 col-sm-8">
+
+          <div class="product-view row">
+            <div class="left-content-product">
+
+              <div class="content-product-left class-honizol col-md-5 col-sm-12 col-xs-12">
+                <div class="large-image  ">
+                  <img itemprop="image" class="product-image-zoom"
+                    [src]="HOST_ORIGIN + '/ede-file/get/image/' + productShow?.optionImageDef.image"
+                    [attr.data-zoom-image]="HOST_ORIGIN + '/ede-file/get/image/' + productShow?.optionImageDef.image"
+                    title="{{product.name}}" alt="{{product.name}}">
+                </div>
+                <a class="thumb-video pull-left" href="https://www.youtube.com/watch?v=HhabgvIIXik"><i
+                    class="fa fa-youtube-play"></i></a>
+
+                <div id="thumb-slider" class="yt-content-slider full_slider owl-drag" data-rtl="yes" data-autoplay="no"
+                  data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="10" data-items_column0="4"
+                  data-items_column1="3" data-items_column2="4" data-items_column3="1" data-items_column4="1"
+                  data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                  <a *ngFor="let option of product?.productOptions;let ix=index" [attr.data-index]="ix"
+                    class="img thumbnail "
+                    [attr.data-image]="HOST_ORIGIN + '/ede-file/get/image/' + option.optionImageDef?.image"
+                    title="{{product.name}}">
+                    <img [src]="HOST_ORIGIN + '/ede-file/get/image/' + option.optionImageDef?.image"
+                      title="{{option.display_name}}" alt="{{option.display_name}}">
+                  </a>
+                </div>
+
+              </div>
+
+              <div class="content-product-right col-md-7 col-sm-12 col-xs-12">
+                <div class="title-product">
+                  <h1>{{product.name}}</h1>
+                </div>
+                <!-- Review ---->
+                <div class="box-review form-group">
+                  <div class="ratings">
+                    <div class="rating-box">
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                    </div>
+                  </div>
+
+                  <a class="reviews_button" href=""
+                    onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a> |
+                  <a class="write_review_button" href=""
+                    onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
+                </div>
+
+                <div class="product-label form-group">
+                  <div class="product_page_price price" itemprop="offerDetails" itemscope=""
+                    itemtype="http://data-vocabulary.org/Offer">
+
+                    <div *ngIf="productShow.productDiscount.length > 0">
+                      <span class="price-new" itemprop="price">{{productShow.price * (100 -
+                        productShow.productDiscount[0].discount) / 100 | number}}đ</span>
+                      <span class="price-old">{{productShow.price | number}}đ</span>
+                    </div>
+                    <div *ngIf="productShow.productDiscount == 'null' || productShow.productDiscount.length <= 0">
+                      <span class="price-new" itemprop="price" *ngIf="product.productDiscount!=[]">{{productShow.price |
+                        number}}đ</span>
+                    </div>
+                  </div>
+                  <div class="stock"><span>Availability:</span> <span class="status-stock">In Stock</span></div>
+                </div>
+
+                <div class="product-box-desc">
+                  <div class="inner-box-desc">
+                    <div class="reward"><span>Price in reward points:</span> 400</div>
+                    <div class="brand"><span>Brand:</span><a href="#">Apple</a> </div>
+                    <div class="model"><span>Product Code:</span> Product 15</div>
+                    <div class="reward"><span>Reward Points:</span> 100</div>
+                  </div>
+                </div>
+
+
+                <div id="product">
+                  <h4>Available Options</h4>
+                  <div class="form required">
+                    <label class="control-label">Thuộc tính</label>
+                  </div>
+                  <div class="image_option_type form-group required">
+                    <div style="float: left; margin-left: 15px;" *ngFor='let item of product.productOptions'>
+                      <div (click)="changeOptione(item)"> <input [checked]="item.id == productShow.id? true:false"
+                          type="radio" id='item.id' name="drone" /> <label style="padding-left: 5px;"
+                          for='{{item.id}}'>{{item.display_name}}</label> </div>
+                    </div>
+                  </div>
+                  <div class="form-group box-info-product">
+                    <div class="option quantity">
+                      <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+                        <label>Qty</label>
+                        <input class="form-control" style="min-width: max-content;" type="number" name="quantity"
+                          value="1" #qty min="1" max="{{productShow.quantity}}">
+
+                        <!-- <span class="input-group-addon product_quantity_down">−</span>
+                        <span class="input-group-addon product_quantity_up">+</span> -->
+                      </div>
+                    </div>
+                    <div class="cart">
+                      <input type="button" data-toggle="tooltip" title="" value="Add to Cart"
+                        data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg"
+                        onclick="cart.add(this.id, '1');" id="{{product.name}}" (click)="addToCart(qty.value)"
+                        data-original-title="Add to Cart">
+                    </div>
+                    <p>Có sẵn {{productShow.quantity}}</p>
+                  </div>
+
+                </div>
+                <!-- end box info product -->
+
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <div class="banners banners6" style="border: 1px solid rgb(218, 218, 218);">
+            <div class="container" style="margin-top: 50px; margin-bottom: 30px;">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-sm-4"><img src="http://localhost:8080/ede-file/get/image/{{product.shop.image}}"
+                        alt="banner1" style=" width: 100px; height: 100px; margin-top: 15px;">
+                    </div>
+                    <div class="col-sm-8">
+                      <h3>{{product.shop.name}}</h3>
+                      <p>Online 10 phút trước</p>
+                      <div class="row">
+                        <div class="col-sm-5"><button
+                            style="border:1px solid rgb(241, 241, 241) ; background-color: rgb(255, 233, 223);  color: rgb(255, 73, 7); width: 100px; height: 37px;"><i
+                              class="glyphicon glyphicon-comment"></i> Chat Ngay</button></div>
+                        <div (click)="toInterfaceShop(product.shop.id)" class="col-sm-5" style="margin-left: 5px;">
+                          <button
+                            style=" margin-left: 10px;border:1px solid rgb(241, 241, 241) ; background-color: rgb(255, 233, 223); color: rgb(255, 73, 7); width: 100px; height: 37px;"><i
+                              class="glyphicon glyphicon-calendar"></i> Xem Shop</button>
+                        </div>
+                        <div class="col-sm-2"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-sm-8" style="margin-top: 30px;">
+                  <div class="row">
+
+                    <!-- <i class="glyphicon glyphicon-comment"> Tỉ Lệ Phản Hồi Chat:<strong style="color: red;"> 100% (trong vài
+                          giây)</strong> </i> -->
+                    <div class="col-sm-3"> Đánh Giá: <strong style="color: red;">5,3K</strong> <br><br>
+                      Sản Phẩm: <strong style="color: red;">987</strong><br><br>
+                    </div>
+                    <div class="col-sm-5"> Tỉ Lệ Phản Hồi: <strong style="color: red;">92%</strong> <br><br>
+                      Thời Gian Phản Hồi: <strong style="color: red;">Trong vài giờ</strong><br><br>
+                    </div>
+                    <div class="col-sm-4">Tham Gia: <strong
+                        style="color: red;">{{product.shop.create_date|date:'dd-MM-yyyy'}}</strong><br><br>
+                      Người Theo Dõi: <strong style="color: red;">98,9k</strong><br><br>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-4" style="margin-top: 30px;">
+                    <i class="glyphicon glyphicon-user"> Người theo dõi: <strong style="color: red;">65785</strong></i><br><br>
+                    <i class="glyphicon glyphicon-star"> Đánh giá: <strong style="color: red;">5.0 (8986 Đánh
+                        giá)</strong></i><br><br>
+                    <i class="glyphicon glyphicon-calendar"> Tham gia: <strong style="color: red;">2 năm trước</strong></i>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <!-- Product Tabs -->
+          <div class="producttab ">
+            <div class="tabsslider  vertical-tabs col-xs-12">
+              <ul class="nav nav-tabs col-lg-2 col-sm-3">
+                <li class="active"><a data-toggle="tab" href="#tab-1">Mô tả sản phẩm</a></li>
+                <li class="item_nonactive"><a data-toggle="tab" href="#tab-review">Đánh giá
+                    SP({{listComment.length}})</a></li>
+                <li class="item_nonactive"><a data-toggle="tab" href="#tab-4">Tags</a></li>
+
+              </ul>
+              <div class="tab-content col-lg-10 col-sm-9 col-xs-12">
+                <div id="tab-1" class="tab-pane fade active in">
+                  <textarea rows="25"
+                    style="width: 100%; height: 100%; border: none;">{{product.description==''?'Không có mô tả':product.description}}</textarea>
+                </div>
+                <div id="tab-review" class="tab-pane fade">
+                  <form>
+                    <div id="review">
+                      <div class="row" *ngFor="let item of listComment">
+                        <div class class="col-sm-1">
+                          <img src="../../assets/img/2.jpg" />
+                        </div>
+                        <div class="col-sm-11">
+                          <p>{{item.user.username}}</p>
+                          <div class="rating">
+                            <span *ngFor='let item2 of fakeArray(item.rate)' class="fa fa-stack"><i
+                                class="fa fa-star fa-stack-2x"></i></span>
+                            <span *ngFor='let item2 of  fakeArray(5 - item.rate )' class="fa fa-stack"><i
+                                *ngIf='item.rate <5' class="fa fa-star-o fa-stack-2x"></i></span>
+                          </div>
+                          <p style="color: gray;">Phân loại hàng:{{item.product.name}}</p>
+                          <p>{{item.content}}</p>
+                          <p>{{item.date | date: 'dd-MM-yyyy'}}</p>
+                        </div>
+                      </div>
+
+                      <hr>
+                      <form [formGroup]='fromComment'>
+                        <div class="row">
+                          <div class="col-sm-1"><img src="../../assets/img/2.jpg" /></div>
+                          <div class="col-sm-11">
+                            <p>{{userLogin!=null?userLogin.username:'GUEST'}}</p>
+                            <textarea formControlName='content' style="border: 1px solid rgb(218, 218, 218);  " rows="7"
+                              cols="110%" placeholder="Nhập bình luận của bạn..."></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <b>Đánh giá: </b> <span>Tệ</span>&nbsp;
+                          <input formControlName='rate' type="radio" name="rating" value="1"> &nbsp;
+                          <input formControlName='rate' type="radio" name="rating" value="2"> &nbsp;
+                          <input formControlName='rate' type="radio" name="rating" value="3"> &nbsp;
+                          <input formControlName='rate' type="radio" name="rating" value="4"> &nbsp;
+                          <input formControlName='rate' type="radio" name="rating" value="5"> &nbsp;<span>Tốt</span>
+
+                        </div>
+                        <div class="buttons clearfix"><a (click)='CreateComment()' id="button-review"
+                            class="btn buttonGray">Gửi đánh giá</a>
+                        </div>
+                      </form>
+                    </div>
+
+                  </form>
+                </div>
+                <div id="tab-4" class="tab-pane fade">
+                  <a href="#">Monitor</a>,
+                  <a href="#">Apple</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- //Product Tabs -->
+
+          <!-- Related Products -->
+
+
+          <div class="related titleLine products-list grid module " *ngIf="listProductRelatedShop.length>1">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h3 class="modtitle">SẢN PHẨM LIÊN QUAN SHOP</h3>
+              </div>
+              <div class="col-sm-6" (click)="toInterfaceShop(product.shop.id)">
+                <h4 style="margin-left: 80%;"><a>Xem tất cả ></a></h4>
+              </div>
+            </div>
+            <div *ngFor="let item of listProductRelatedShop">
+              <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12"
+                *ngIf="item.idProduct!=product.idProduct">
+
+                <div class="product-item-container" style="height:300px">
+                  <div class="left-block">
+                    <div class="product-image-container second_img" style="height:150px">
+                      <a (click)="openDetailByRelated(item.idProduct)" target="_self" title="Chicken swinesha">
+                        <img src="http://localhost:8080/ede-file/get/image/{{
+                        item.optionDef.optionImageDef.image
+                      }}" class="img-1 img-responsive" alt="image">
+                        <img src="http://localhost:8080/ede-file/get/image/{{
+                        item.optionDef.optionImageDef.image
+                      }}" class="img-2 img-responsive" alt="image">
+                      </a>
+                    </div>
+                    <div class="box-label">
+                      <span class="label-product label-sale" *ngIf="item.optionDef.productDiscount[0] != undefined">
+                        -{{ item.optionDef.productDiscount[0].discount}}%
+                      </span>
+
+                    </div>
+                  </div>
+                  <div class="right-block">
+                    <div class="caption">
+                      <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                      </div>
+                      <h4><a href="product.html" title="Chicken swinesha" target="_self"></a>
+                        {{item.name}}
+                      </h4>
+                      <div class="price">
+                        <div>
+                          <span class="price-new">$46.00</span>
+                          <span class="price-old">$55.00</span>
+                        </div>
+                        <span class="price-new"></span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="related titleLine products-list grid module ">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h3 class="modtitle">SẢN PHẨM LIÊN QUAN</h3>
+              </div>
+              <div class="col-sm-6">
+
+              </div>
+            </div>
+
+            <div *ngFor="let item of listProductRelatedCategory"
+              class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+
+              <div class="product-item-container" style="height:300px">
+                <div class="left-block">
+                  <div class="product-image-container second_img" style="height:150px">
+                    <a (click)="openDetailByRelated(item.idProduct)" target="_self" title="Chicken swinesha">
+                      <img src="http://localhost:8080/ede-file/get/image/{{
+                        item.optionDef.optionImageDef.image
+                      }}" class="img-1 img-responsive" alt="image">
+                      <img src="http://localhost:8080/ede-file/get/image/{{
+                        item.optionDef.optionImageDef.image
+                      }}" class="img-2 img-responsive" alt="image">
+                    </a>
+                  </div>
+                  <div class="box-label">
+                    <span class="label-product label-sale" *ngIf="item.optionDef.productDiscount[0] != undefined">
+                      -{{ item.optionDef.productDiscount[0].discount}}%
+                    </span>
+                  </div>
+                </div>
+                <div class="right-block">
+                  <div class="caption">
+                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                    </div>
+                    <h4><a href="product.html" title="Chicken swinesha" target="_self"></a>
+                      {{item.name}}
+                    </h4>
+                    <div class="price">
+                      <div>
+                        <span class="price-new">$46.00</span>
+                        <span class="price-old">$55.00</span>
+                      </div>
+                      <span class="price-new"></span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- end Related  Products-->
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+    </div>
+    <!--Middle Part End-->
+  </div>
+</body>

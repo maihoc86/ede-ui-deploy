@@ -1,0 +1,533 @@
+<div class="col-sm-2">
+  <app-aside-shop></app-aside-shop>
+</div>
+<div class="col-sm-10" style="margin-top: 70px; border: 1px solid rgb(211, 211, 211); border-radius: 3px;">
+  <h2><b>Tổng Quan</b></h2>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="bottom2 col-lg-12 col-md-6 col-sm-6">
+        <div class="search-header-w">
+          <div id="sosearchpro" class="sosearchpro-wrapper so-search">
+            <h3><b>Đã Thanh toán</b></h3>
+            <h4>Tháng này</h4>
+            <h1><b>{{totalMonth|currency:'VND'}}</b></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="bottom2 col-lg-12 col-md-6 col-sm-6">
+        <div class="search-header-w">
+          <div id="sosearchpro" class="sosearchpro-wrapper so-search">
+            <h3><b>Đã Thanh toán</b></h3>
+            <div class="row">
+              <div class="col-sm-4">
+                <h4>7 ngày gần đây</h4>
+                <h1><b>{{total7Day| currency:'VND'}}</b></h1>
+              </div>
+              <div class="col-sm-4">
+                <h4>Số đơn hàng đã hủy</h4>
+                <h1><b>{{countitemsDaHuy}}</b></h1>
+              </div>
+              <div class="col-sm-4">
+                <h4>Tổng cộng</h4>
+                <h1><b>{{total|currency:'VND'}}</b></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+  </div>
+
+
+</div>
+<div class="col-sm-10" style="margin-top: 70px;">
+  <ul class="nav nav-tabs">
+    <li [ngClass]="activeTab == 'all' ? 'active' : ''"><a data-toggle="tab" href="#tab-1"
+        (click)="filterOrderByStatus('')">Tất cả</a>
+    </li>
+    <li [ngClass]="activeTab == 'Đã giao' ? 'active' : ''"><a data-toggle="tab" href="#tab-2"
+        (click)="filterOrderByStatus('Đã giao')">Đã giao</a>
+    </li>
+    <li [ngClass]="activeTab == 'Đã hủy' ? 'active' : ''"><a data-toggle="tab" href="#tab-3"
+        (click)="filterOrderByStatus('Đã hủy')">Đơn huỷ</a>
+    </li>
+    <li [ngClass]="activeTab == 'Đang giao' ? 'active' : ''"><a data-toggle="tab" href="#tab-4"
+        (click)="filterOrderByStatus('Đang giao')">Đang giao</a>
+    <li [ngClass]="activeTab == 'Chờ xác nhận' ? 'active' : ''"><a data-toggle="tab" href="#tab-5"
+        (click)="filterOrderByStatus('Chờ xác nhận')">Chờ xác nhận</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div [ngClass]="activeTab == 'all' ? 'tab-pane active' : 'tab-pane' " id="tab-1">
+      <div class="main-container container">
+
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordAll"
+                          id="keywordAll" #keywordAll>
+
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchAllOrder(keywordAll.value)" type="submit" class="btn btn-danger" value="Tìm"
+                      style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+            <!-- ALL -->
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                    <td><strong>Tên người mua</strong></td>
+                    <td><strong>Số điện thoại</strong></td>
+                    <td><strong>Ngày mua</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                    <td><strong>Trạng thái thanh toán</strong></td>
+                    <td><strong>Code Payment</strong></td>
+                    <td><strong>Trạng thái vận chuyển</strong></td>
+                    <td><strong>Ghi chú</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsAll  | paginate: {itemsPerPage: size, currentPage: pAll, totalItems: count, id: 'all'}">
+
+                    <td>{{e.user.first_name}} {{e.user.last_name}}</td>
+                    <td>{{e.phone}}</td>
+                    <td>{{e.create_date | date :'dd-MM-yyyy'}}</td>
+                    <td>{{e.total_amount | currency :'VND'}}</td>
+                    <td>{{e.payment_status}}</td>
+                    <td>{{e.code_payment}}</td>
+                    <td>{{e.status}}</td>
+                    <td>{{e.note}}</td>
+                    <td>
+                      <button type="submit" (click)="showOrderDetail(e.id)" data-toggle="modal"
+                        data-target="#modalOrder" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChange($event ,'')" id="all"></pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="activeTab == 'Đã giao' ? 'tab-pane active' : 'tab-pane' " id="tab-2">
+      <div class="main-container container">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordTrue"
+                          id="keywordTrue" #keywordTrue>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchOrderTrue(keywordTrue.value)" type="submit" class="btn btn-danger" value="Tìm"
+                      style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                    <td><strong>Tên người mua</strong></td>
+                    <td><strong>Số điện thoại</strong></td>
+                    <td><strong>Ngày mua</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                    <td><strong>Trạng thái thanh toán</strong></td>
+                    <td><strong>Code Payment</strong></td>
+                    <td><strong>Trạng thái vận chuyển</strong></td>
+                    <td><strong>Ghi chú</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsDaGiao  | paginate: {itemsPerPage: size, currentPage: pDaGiao, totalItems: count, id: 'dagiao'}">
+
+                    <td>{{e.user.first_name}} {{e.user.last_name}}</td>
+                    <td>{{e.phone}}</td>
+                    <td>{{e.create_date | date :'dd-MM-yyyy'}}</td>
+                    <td>{{e.total_amount | currency :'VND'}}</td>
+                    <td>{{e.payment_status}}</td>
+                    <td>{{e.code_payment}}</td>
+                    <td>{{e.status}}</td>
+                    <td>{{e.note}}</td>
+                    <td>
+                      <button type="submit" (click)="showOrderDetail(e.id)" data-toggle="modal"
+                        data-target="#modalOrder" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                      <button type="submit" data-toggle="modal" data-target="#modalDanhGiaOrder" class="btn btn-success"
+                        style="margin-left: 5px;" (click)="viewDanhGiaOrder(e.id)">Xem
+                        đánh giá</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChange($event, 'dagiao')" id="dagiao"></pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="activeTab == 'Đã hủy' ? 'tab-pane active' : 'tab-pane' " id="tab-3">
+      <div class="main-container container">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordFalse"
+                          id="keywordFalse" #keywordFalse>
+
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchOrderFalse(keywordFalse.value)" type="submit" class="btn btn-danger"
+                      value="Tìm" style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                    <td><strong>Tên người mua</strong></td>
+                    <td><strong>Số điện thoại</strong></td>
+                    <td><strong>Ngày mua</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                    <td><strong>Trạng thái thanh toán</strong></td>
+                    <td><strong>Code Payment</strong></td>
+                    <td><strong>Trạng thái vận chuyển</strong></td>
+                    <td><strong>Ghi chú</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsDaHuy  | paginate: {itemsPerPage: size, currentPage: pDaHuy, totalItems: count, id:'dahuy'}">
+
+                    <td>{{e.user.first_name}} {{e.user.last_name}}</td>
+                    <td>{{e.phone}}</td>
+                    <td>{{e.create_date | date :'dd-MM-yyyy'}}</td>
+                    <td>{{e.total_amount | currency :'VND'}}</td>
+                    <td>{{e.payment_status}}</td>
+                    <td>{{e.code_payment}}</td>
+                    <td>{{e.status}}</td>
+                    <td>{{e.note}}</td>
+                    <td>
+                      <button type="submit" (click)="showOrderDetail(e.id)" data-toggle="modal"
+                        data-target="#modalOrder" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChange($event, 'dahuy')" id="dahuy"></pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="activeTab == 'Đang giao' ? 'tab-pane active' : 'tab-pane' " id="tab-4">
+      <div class="main-container container">
+
+
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordFalse"
+                          id="keywordFalse" #keywordFalse>
+
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchOrderFalse(keywordFalse.value)" type="submit" class="btn btn-danger"
+                      value="Tìm" style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên người mua</strong></td>
+                    <td><strong>Số điện thoại</strong></td>
+                    <td><strong>Ngày mua</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                    <td><strong>Trạng thái thanh toán</strong></td>
+                    <td><strong>Code Payment</strong></td>
+                    <td><strong>Trạng thái vận chuyển</strong></td>
+                    <td><strong>Ghi chú</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsDangGiao  | paginate: {itemsPerPage: size, currentPage: pDangGiao, totalItems: count, id:'danggiao'}">
+                    <td>{{e.user.first_name}} {{e.user.last_name}}</td>
+                    <td>{{e.phone}}</td>
+                    <td>{{e.create_date | date :'dd-MM-yyyy'}}</td>
+                    <td>{{e.total_amount | currency :'VND'}}</td>
+                    <td>{{e.payment_status}}</td>
+                    <td>{{e.code_payment}}</td>
+                    <td>{{e.status}}</td>
+                    <td>{{e.note}}</td>
+                    <td>
+                      <button type="submit" (click)="showOrderDetail(e.id)" data-toggle="modal"
+                        data-target="#modalOrder" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChange($event, 'danggiao')" id="choxacnhan">
+              </pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="activeTab == 'Chờ xác nhận' ? 'tab-pane active' : 'tab-pane' " id="tab-5">
+      <div class="main-container container">
+
+
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordFalse"
+                          id="keywordFalse" #keywordFalse>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchOrderFalse(keywordFalse.value)" type="submit" class="btn btn-danger"
+                      value="Tìm" style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên người mua</strong></td>
+                    <td><strong>Số điện thoại</strong></td>
+                    <td><strong>Ngày mua</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                    <td><strong>Trạng thái thanh toán</strong></td>
+                    <td><strong>Code Payment</strong></td>
+                    <td><strong>Trạng thái vận chuyển</strong></td>
+                    <td><strong>Ghi chú</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsChoXacNhan  | paginate: {itemsPerPage: size, currentPage: pChoXacNhan, totalItems: count, id:'choxacnhan'}">
+
+                    <td>{{e.user.first_name}} {{e.user.last_name}}</td>
+                    <td>{{e.phone}}</td>
+                    <td>{{e.create_date | date :'dd-MM-yyyy'}}</td>
+                    <td>{{e.total_amount | currency:'VND'}}</td>
+                    <td>{{e.payment_status}}</td>
+                    <td>{{e.code_payment}}</td>
+                    <td>{{e.status}}</td>
+                    <td>{{e.note}}</td>
+                    <td>
+                      <button type="submit" (click)="showOrderDetail(e.id)" data-toggle="modal"
+                        data-target="#modalOrder" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                      &nbsp;
+
+                      <button type="button" data-toggle="tooltip" title="Xác nhận" class="btn btn-success"
+                        (click)="acceptOrder(e)"><i class="fa fa-check-circle"></i></button>
+                      &nbsp;
+                      <button type="button" data-toggle="tooltip" title="Hủy" class="btn btn-danger"
+                        (click)="cancelOrder(e)"><i class="fa fa-times-circle"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChange($event, 'choxacnhan')" id="choxacnhan">
+              </pagination-controls>
+            </div>
+          </div>
+          <!--Middle Part End -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="modalOrder" tabindex="-1" role="dialog"
+      aria-labelledby="modalOrderLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalOrderLabel">Đơn hàng chi tiết</h5>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordDetail"
+                          id="keywordDetail" #keywordDetail>
+
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="searchOrderDetail(keywordDetail.value)" type="submit" class="btn btn-danger"
+                      value="Tìm" style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="margin-top: 16px;">
+              </div>
+            </div><br>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td>Hình ảnh</td>
+
+                    <td><strong>Tên sản phẩm</strong></td>
+                    <td><strong>Tên loại sản phẩm</strong></td>
+                    <td><strong>Giá</strong></td>
+                    <td><strong>Số lượng</strong></td>
+                    <td><strong>Tổng tiền</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let e of itemsDetail  | paginate: {itemsPerPage: size, currentPage: pDetail, totalItems: countDetail, id:'detail'}">
+                    <td>
+                      <img src="http://localhost:8080/ede-file/get/image/idProductOption/{{e.productOption.id}}"
+                        width="50" height="50">
+                    </td>
+                    <td>{{e.productOption.product.name}}</td>
+                    <td>{{e.productOption.display_name}}</td>
+                    <td>{{e.price | currency :'VND'}}</td>
+                    <td>{{e.quantity}}</td>
+                    <td>{{e.price * e.quantity | currency :'VND'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="handlePageChangeDetail($event)" id="detail"></pagination-controls>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modalDanhGiaOrder" tabindex="-1" role="dialog"
+      aria-labelledby="modalDanhGiaOrderLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modalDanhGiaOrderLabel">Đánh giá hóa đơn</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <span>
+              Đánh giá: <strong>{{listDanhGiaOrder.rate}} sao</strong>
+            </span>
+            <br>
+            <span>
+              Nội dung: <strong>{{listDanhGiaOrder.content}}</strong>
+            </span><br>
+            <span>
+              Hình ảnh: <br>
+              <img *ngFor="let url of images" [src]="url" height="150" width="170px" style="margin: 3px" />
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

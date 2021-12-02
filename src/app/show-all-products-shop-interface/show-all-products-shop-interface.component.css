@@ -1,0 +1,12 @@
+.list-group-item:active{
+
+    color: #ff3c00;
+    font-weight: 400;
+} 
+.list-group-item{
+    cursor: pointer;
+} 
+.title{
+    text-transform: uppercase;
+    font-size: 15px;
+}

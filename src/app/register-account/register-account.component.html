@@ -1,0 +1,308 @@
+<!-- Main Container  -->
+<div class="main-container container">
+  <ul class="breadcrumb">
+    <li>
+      <a href="#"><i class="fa fa-home"></i></a>
+    </li>
+    <li><a href="#" [routerLink]="['/user/account']">Tài khoản</a></li>
+    <li><a href="#">Đăng ký</a></li>
+  </ul>
+  <div class="row">
+    <div id="content" class="col-sm-12">
+      <h2 class="title">Đăng ký tài khoản</h2>
+      <p>
+        Nếu bạn đã có tài khoản và không cần đăng ký, hãy vào trang
+        <a routerLink="/login">Đăng nhập</a>.
+      </p>
+      <form [formGroup]="register" class="form-horizontal account-register clearfix">
+        <fieldset id="account">
+          <legend>Thông tin cá nhân</legend>
+          <div class="form-group required" style="display: none">
+            <label class="col-sm-2 control-label">Customer Group</label>
+            <div class="col-sm-10">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="customer_group_id" value="1" checked="checked" />
+                  Mặc định
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-username" id="to_name">Tài khoản</label>
+            <div class="col-sm-10">
+              <input formControlName="username" type="text" placeholder="Tài khoản" id="input-username"
+                class="form-control" required />
+              <div *ngIf="
+                  register.controls['username'].invalid &&
+                  (register.controls['username'].dirty ||
+                    register.controls['username'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['username'].errors &&
+                    register.controls['username'].errors.required
+                  ">Tài khoản là bắt buộc.</span>
+                <span *ngIf="
+                    register.controls['username'].errors &&
+                    register.controls['username'].errors.pattern
+                  ">Tài khoản không đúng định dạng.</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-firstname">Họ</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="first_name" placeholder="Họ" id="input-firstname"
+                class="form-control" />
+              <div *ngIf="
+                  register.controls['first_name'].invalid &&
+                  (register.controls['first_name'].dirty ||
+                    register.controls['first_name'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['first_name'].errors &&
+                    register.controls['first_name'].errors.required
+                  ">Họ là bắt buộc.</span>
+                <span *ngIf="
+                    register.controls['first_name'].errors &&
+                    register.controls['first_name'].errors.pattern
+                  ">Họ không đúng định dạng.</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-lastname">Tên</label>
+            <div class="col-sm-10">
+              <input type="text" name="lastname" value="" formControlName="last_name" placeholder="Tên"
+                id="input-lastname" class="form-control" />
+              <div *ngIf="
+                  register.controls['last_name'].invalid &&
+                  (register.controls['last_name'].dirty ||
+                    register.controls['last_name'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['last_name'].errors &&
+                    register.controls['last_name'].errors.required
+                  ">Tên là bắt buộc.</span>
+                <span *ngIf="
+                    register.controls['last_name'].errors &&
+                    register.controls['last_name'].errors.pattern
+                  ">Tên không đúng định dạng.</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
+            <div class="col-sm-10">
+              <input type="email" name="email" value="" formControlName="email" placeholder="E-Mail" id="input-email"
+                class="form-control" />
+              <div *ngIf="
+                  register.controls['email'].invalid &&
+                  (register.controls['email'].dirty ||
+                    register.controls['email'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['email'].errors &&
+                    register.controls['email'].errors.required
+                  ">Email là bắt buộc.</span>
+                <span *ngIf="
+                    register.controls['email'].errors &&
+                    register.controls['email'].errors.email
+                  ">Email không đúng định dạng.</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone">Số điện thoại</label>
+            <div class="col-sm-10">
+              <input type="tel" name="telephone" value="" formControlName="phone" placeholder="Số điện thoại"
+                id="input-telephone" class="form-control" />
+              <div *ngIf="
+                  register.controls['phone'].invalid &&
+                  (register.controls['phone'].dirty ||
+                    register.controls['phone'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['phone'].errors &&
+                    register.controls['phone'].errors.required
+                  ">Số điện thoại là bắt buộc.</span>
+                <span *ngIf="
+                    register.controls['phone'].errors &&
+                    register.controls['phone'].errors.pattern
+                  ">Số điện thoại không đúng định dạng.</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-zone">Giới tính</label>
+            <div class="col-sm-10">
+              <select name="zone_id" id="input-zone" class="form-control" formControlName="gender">
+                <option [ngValue]="null" disabled>
+                  --- Chọn giới tính ---
+                </option>
+                <option *ngFor="let prf of genders" [ngValue]="prf.gdName">
+                  {{
+                  prf.gdName == "M"
+                  ? "Nam"
+                  : prf.gdName == "W"
+                  ? "Nữ"
+                  : "Khác"
+                  }}
+                </option>
+              </select>
+              <div *ngIf="
+                  register.controls['gender'].invalid &&
+                  register.controls['gender'].touched
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['gender'].errors &&
+                    register.controls['gender'].errors.required
+                  ">Giới tính là bắt buộc</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset id="address">
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-city">Tỉnh/thành</label>
+            <div class="col-sm-10">
+              <select name="country_id" id="input-city" class="form-control" formControlName="city"
+                (change)="getDistricts()">
+                <option [ngValue]="null" disabled>
+                  --- Chọn tỉnh thành ---
+                </option>
+                <option *ngFor="let prf of listCitys" [ngValue]="prf">
+                  {{ prf.name }}
+                </option>
+              </select>
+              <div *ngIf="
+              register.controls['city'].invalid &&
+              (register.controls['city'].dirty ||
+                register.controls['city'].touched)
+            " class="alert alert-danger">
+                <span *ngIf="
+                register.controls['city'].errors &&
+                register.controls['city'].errors.required
+              ">Tỉnh/thành là bắt buộc</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-district">Quận, huyện</label>
+            <div class="col-sm-10">
+              <select name="country_id" id="input-district" class="form-control" formControlName="district"
+                (change)="getWards()">
+                <option [ngValue]="null" disabled>
+                  --- Chọn quận, huyện ---
+                </option>
+                <option *ngFor="let prf of listDistricts" [ngValue]="prf">
+                  {{ prf.name }}
+                </option>
+              </select>
+              <div *ngIf="
+                  register.controls['district'].invalid &&
+                  (register.controls['district'].dirty ||
+                    register.controls['district'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['district'].errors &&
+                    register.controls['district'].errors.required
+                  ">Quận / huyện là bắt buộc</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-wards">Phường, xã</label>
+            <div class="col-sm-10">
+              <select name="country_id" id="input-wards" class="form-control" formControlName="wards">
+                <option [ngValue]="null" disabled>
+                  --- Chọn phường xã ---
+                </option>
+                <option *ngFor="let prf of listWards" [ngValue]="prf">
+                  {{ prf.name }}
+                </option>
+              </select>
+              <div *ngIf="
+                  register.controls['wards'].invalid &&
+                  (register.controls['wards'].dirty ||
+                    register.controls['wards'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['wards'].errors &&
+                    register.controls['wards'].errors.required
+                  ">Phường / xã là bắt buộc</span>
+              </div>
+            </div>
+          </div>
+          <legend>Địa chỉ</legend>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-address-1">Địa chỉ cụ thể</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="address" placeholder="Địa chỉ" id="input-address-1"
+                class="form-control" />
+              <div *ngIf="
+                  register.controls['address'].invalid &&
+                  (register.controls['address'].dirty ||
+                    register.controls['address'].touched)
+                " class="alert alert-danger">
+                <span *ngIf="
+                    register.controls['address'].errors &&
+                    register.controls['address'].errors.required
+                  ">Địa chỉ là bắt buộc</span>
+                <span *ngIf="
+                    register.controls['address'].errors &&
+                    register.controls['address'].errors.pattern
+                  ">Địa chỉ không đúng định dạng</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Mật khẩu</legend>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-password">Mật khẩu</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" formControlName="password" value="" placeholder="Mật khẩu"
+                (change)="onPasswordChange()" id="input-password" class="form-control" />
+              <div *ngIf="
+                  register.controls['password'].invalid &&
+                  (register.controls['password'].dirty ||
+                    register.controls['password'].touched)
+                " class="alert alert-danger">
+                <div *ngIf="
+                    register.controls['password'].errors &&
+                    register.controls['password'].errors.pattern
+                  ">
+                  Mật khẩu phải từ 8 ký tự và bé hơn 50 ký tự, bao gồm chữ
+                  thường, chữ hoa
+                </div>
+                <span *ngIf="
+                    register.controls['password'].errors &&
+                    register.controls['password'].errors.required
+                  ">Mật khẩu là bắt buộc</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-confirm">Xác nhận mật khẩu</label>
+            <div class="col-sm-10">
+              <input type="password" name="confirmPassword" formControlName="confirmPassword"
+                (change)="onPasswordChange()" placeholder="Xác nhận mật khẩu" class="form-control" />
+              <span *ngIf="
+                  register.controls['confirmPassword'].hasError('mismatch')
+                " class="alert alert-danger">Mật khẩu không trùng khớp
+              </span>
+            </div>
+          </div>
+        </fieldset>
+        <div class="buttons">
+          <div class="pull-right">
+            <input [disabled]="register.invalid ? 'disabled': null" type="submit " class="btn btn-success"
+              (click)="registerUser()" name="agree " value="1 " value="Đăng ký" class="btn btn-primary" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- //Main Container -->

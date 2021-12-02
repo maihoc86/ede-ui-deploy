@@ -1,0 +1,68 @@
+<body class="common-home res layout-1">
+
+<!-- Main Container  -->
+<div class="main-container container">
+    <div id="content">
+        <div class="row">
+            
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 main-left sidebar-offcanvas">
+                Aside
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 main-right">
+                <!-- Listing tabs custom -->
+                <div class="module listingtab1-custom listingtab-layout1">
+                    <h3 class="modtitle"><span>Search:</span><span style="text-transform: none;">{{params.search || '-'}}</span></h3>
+                    <div id="so_listing_tabs_2" class="so-listing-tabs first-load">
+                        <div class="loadeding"></div>
+                        <div class="ltabs-wrap">
+                            <div class="ltabs-tabs-container" data-delay="300" data-duration="600" data-effect="starwars" data-ajaxurl="" data-type_source="0" data-lg="1" data-md="1" data-sm="1" data-xs="1" data-margin="0">
+                                <!--Begin Tabs-->                            
+                                <div class="ltabs-tabs-wrap">   
+                                    <span class='ltabs-tab-selected'></span>
+                                    <span class="ltabs-tab-arrow">▼</span>
+                                    <ul class="ltabs-tabs cf list-sub-cat font-title">                                  
+                                        <li class="ltabs-tab tab-sel" data-category-id="51" data-active-content=".items-category-51"><span class="ltabs-tab-label">Bathroom</span></li>
+                                        <li class="ltabs-tab  " data-category-id="52" data-active-content=".items-category-52">   <span class="ltabs-tab-label">Bedroom</span></li>
+                                        <li class="ltabs-tab  " data-category-id="53" data-active-content=".items-category-53">   <span class="ltabs-tab-label">Decor</span></li>                                                
+                                    </ul>
+                                </div>
+                                <!-- End Tabs-->
+                            </div>
+                            <div class="ltabs-items-container products-list grid">
+                                <!--Begin Items-->
+                                <div class="ltabs-items ltabs-items-selected items-category-51" data-total="14">
+                                    <div class="ltabs-items-inner ltabs-slider">
+                                        <!-- item listing tab -->
+                                        <div class="ltabs-item">
+                                            <div class="item-inner product-layout transition product-grid"  *ngFor="let item of productSearchPage.content">
+                                                <app-product-search-element [product]="item"></app-product-search-element>
+                                            </div>
+                                        </div>
+                                        <!-- end item listing tab -->
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="ltabs-items items-category-52 grid" data-total="14">
+                                    <div class="ltabs-loading"></div>
+                                    
+                                </div>
+
+                                <div class="ltabs-items  items-category-53 grid" data-total="14">
+                                    <div class="ltabs-loading"></div>
+                                </div>
+                                <!--End Items-->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end Listing tabs custom -->
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!-- //Main Container -->
+</body>

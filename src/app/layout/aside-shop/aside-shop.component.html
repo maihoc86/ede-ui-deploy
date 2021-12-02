@@ -1,0 +1,45 @@
+<aside class=" content-aside" id="column-left">
+  <ul class="breadcrumb">
+    <li><a href="#"><i class="fa fa-home"></i></a></li>
+    <li><a href="#">Kênh người bán</a></li>
+  </ul>
+  <div class="module category-style">
+    <div class="modtitle"></div>
+    <div class="modcontent">
+      <div class="box-category">
+        <ul class="list-group">
+          <li class="hadchild"><a class="cutom-parent"> Quản lý shop</a>
+            <ul>
+              <li><a routerLink="/shop/profile" [routerLinkActive]="'active-link'">Hồ sơ shop</a></li>
+              <li><a routerLink="/shop/category" [routerLinkActive]="'active-link'">Danh mục shop</a></li>
+              <li><a routerLink="/shop/payment" [routerLinkActive]="'active-link'">Phương thức thanh toán</a></li>
+            </ul>
+
+          </li>
+          <li class="hadchild"><a class="cutom-parent"> Quản lý sản phẩm</a>
+            <ul>
+              <li><a routerLink="/shop/product/all" [routerLinkActive]="'active-link'">Tất cả sản phẩm</a></li>
+              <li><a routerLink="/shop/product/manager/" [routerLinkActive]="'active-link'">Thêm sản phẩm</a></li>
+              <li><a>Thống kê sản phẩm</a></li>
+            </ul>
+          </li>
+          <li class="hadchild"><a class="cutom-parent"> Quản lý đơn hàng</a>
+            <ul>
+              <li><a routerLink="/shop/order/all" [routerLinkActive]="'active-link'">Tất cả đơn hàng</a></li>
+              <li><a>Đơn huỷ</a></li>
+              <li><a>Trả hàng/ Hoàn tiền</a></li>
+            </ul>
+          </li>
+          <li class="hadchild"><a class="cutom-parent"> Tài chính</a>
+            <ul>
+              <li><a routerLink="/shop/revenue" [routerLinkActive]="'active-link'">Doanh thu</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+
+</aside>

@@ -1,0 +1,353 @@
+<div style="background-color: #f5f5f5; height: '110%'; width: '100%';">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">
+    <app-aside-user></app-aside-user>
+  </div>
+  <div class="col-sm-8"
+    style="background-color: #fff; margin-top: 20px; border-radius: 3px;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+    <ul class="nav nav-tabs" style="margin-top: 20px;">
+      <li class="active"><a data-toggle="tab" href="#home" (click)="getAllOrderUser()">Tất cả</a></li>
+      <li><a data-toggle="tab" href="#menu1" (click)="filterOrder('Đã giao')">Đã giao</a></li>
+      <li><a data-toggle="tab" href="#menu2" (click)="filterOrder('Đã hủy')">Đã hủy</a></li>
+      <li><a data-toggle="tab" href="#menu3" (click)="filterOrder('Chờ xác nhận')">Đang chờ xác nhận</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+        <div class="row" style="margin-bottom: 30px;">
+          <div class="col-md-10">
+            <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+              <div class="position-relative">
+                <input type="text" class="form-control" placeholder="Search..." name="keywordDetail" id="keywordDetail"
+                  #keywordDetail>
+
+              </div>
+            </form>
+          </div>
+          <div class="col-md-2">
+            <input type="submit" class="btn btn-danger" value="Tìm"
+              style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+            &nbsp;
+          </div>
+        </div>
+        <div *ngFor="let item of listOrder"
+          style="margin-bottom: 50px; margin-top: 20px; background-color:rgb(255, 254, 245); padding: 30px;">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-8">
+              <p>
+                <em
+                  style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 2px; margin-right: 6px;">Yêu
+                  thích+</em>
+                <b style="margin-right: 6px;"> {{item.order_detail[0].productOption.product.shop.name}}</b>
+                <em
+                  style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 5px;margin-right: 8px;"><span
+                    class="glyphicon glyphicon-comment"></span> Chat</em>
+                <em style="margin-right: 6px; border: 1px dimgray solid; padding: 5px;border-radius: 2px;"><span
+                    class="glyphicon glyphicon-calendar"></span> Xem shop</em>
+              </p>
+            </div>
+            <div class="col-sm-4">
+              <p>
+                <em *ngIf="item.status=='Đã giao'" style="color: #26aa99;"><span
+                    class="glyphicon glyphicon-send"></span> Giao hàng thành công</em>
+                <em *ngIf="item.status=='Đã hủy'" style="color: #f75a00;"><span class="glyphicon glyphicon-send"></span>
+                  Giao hàng thất bại</em>
+                |
+                <em style="color: #d43f3a;">{{item.status}}</em>
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div *ngFor="let itemP of item.order_detail" style="margin-bottom: 30px;">
+            <div class="row">
+              <div class="col-sm-2">
+                <img src="http://localhost:8080/ede-file/get/image/{{
+                  itemP.productOption.product_option_images[0].image
+                }}" height="90px" width="90px">
+              </div>
+              <div class="col-sm-8">
+                <em style="font-size: 16px;">{{itemP.productOption.product.name}}</em><br>
+                <em style="color: darkgrey;">Phân loại: {{itemP.productOption.display_name}}</em><br>
+                <em>x{{itemP.quantity}}</em>
+              </div>
+              <div class="col-sm-2 row">
+                <del *ngIf="itemP.productOption.price!=itemP.price" style="color: darkgrey; margin-right: 6px;">
+                  {{itemP.productOption.price | currency :'VND'}}</del>
+                <em style="color: #d43f3a;">{{itemP.price | currency :'VND'}}</em>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5" style="margin-top: 15px;float: right">
+              <span style="color: #d43f3a; margin-left: 50px;" class="glyphicon glyphicon-fire"></span> Tổng tiền:
+              <del *ngIf="item.discount != null && item.discount.discount > 0"
+                style="color: darkgrey; margin-right: 6px;">
+                {{item.total_amount / ((100 - item.discount.discount) / 100) | currency
+                :'VND'}}</del> <em style="color: #d43f3a; font-size: 20px;">{{item.total_amount |
+                currency
+                :'VND'}}</em>
+              <br>
+              <input type="submit" class="btn btn-danger" value="Đánh giá" data-toggle="modal"
+                data-target="#modalDanhGia" (click)="showViewDanhGia(item)"
+                style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px;">
+              <input type="submit" class="btn btn-danger" value="Liên hệ người bán"
+                style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px; margin-left: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <div *ngFor="let item of listOrderFilter">
+          <div style="margin-bottom: 50px; margin-top: 20px; background-color:rgb(255, 254, 245); padding: 30px;">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-8">
+                <p>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 2px; margin-right: 6px;">Yêu
+                    thích+</em>
+                  <b style="margin-right: 6px;"> {{item.order_detail[0].productOption.product.shop.name}}</b>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 5px;margin-right: 8px;"><span
+                      class="glyphicon glyphicon-comment"></span> Chat</em>
+                  <em style="margin-right: 6px; border: 1px dimgray solid; padding: 5px;border-radius: 2px;"><span
+                      class="glyphicon glyphicon-calendar"></span> Xem shop</em>
+                </p>
+              </div>
+              <div class="col-sm-4">
+                <p>
+                  <em *ngIf="item.status=='Đã giao'" style="color: #26aa99;"><span
+                      class="glyphicon glyphicon-send"></span> Giao hàng thành công</em>
+                  <em *ngIf="item.status=='Đã hủy'" style="color: #f75a00;"><span
+                      class="glyphicon glyphicon-send"></span> Giao hàng thất bại</em>
+                  |
+                  <em style="color: #d43f3a;">{{item.status}}</em>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div *ngFor="let itemP of item.order_detail" style="margin-bottom: 30px;">
+              <div class="row">
+                <div class="col-sm-2">
+                  <img src="http://localhost:8080/ede-file/get/image/{{
+                    itemP.productOption.product_option_images[0].image
+                  }}" height="90px" width="90px">
+                </div>
+                <div class="col-sm-8">
+                  <em style="font-size: 16px;">{{itemP.productOption.product.name}}</em><br>
+                  <em style="color: darkgrey;">Phân loại: {{itemP.productOption.display_name}}</em><br>
+                  <em>x{{itemP.quantity}}</em>
+                </div>
+                <div class="col-sm-2 row">
+                  <del *ngIf="itemP.productOption.price!=itemP.price" style="color: darkgrey; margin-right: 6px;">
+                    {{itemP.productOption.price | currency :'VND'}}</del>
+                  <em style="color: #d43f3a;">{{itemP.price | currency :'VND'}}</em>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5" style="margin-top: 15px;">
+                <span style="color: #d43f3a; margin-left: 50px;" class="glyphicon glyphicon-fire"></span> Tổng tiền: <em
+                  style="color: #d43f3a; font-size: 20px;">{{item.total_amount | currency :'VND'}}</em>
+                <br>
+                <input type="submit" class="btn btn-danger" value="Đánh giá"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px;">
+                <input type="submit" class="btn btn-danger" value="Liên hệ người bán"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px; margin-left: 20px;">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <div *ngFor="let item of listOrderFilter">
+          <div style="margin-bottom: 50px;margin-top: 20px; background-color:rgb(255, 254, 245); padding: 30px;">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-8">
+                <p>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 2px; margin-right: 6px;">Yêu
+                    thích+</em>
+                  <b style="margin-right: 6px;"> {{item.order_detail[0].productOption.product.shop.name}}</b>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 5px;margin-right: 8px;"><span
+                      class="glyphicon glyphicon-comment"></span> Chat</em>
+                  <em style="margin-right: 6px; border: 1px dimgray solid; padding: 5px;border-radius: 2px;"><span
+                      class="glyphicon glyphicon-calendar"></span> Xem shop</em>
+                </p>
+              </div>
+              <div class="col-sm-4">
+                <p>
+                  <em *ngIf="item.status=='Đã giao'" style="color: #26aa99;"><span
+                      class="glyphicon glyphicon-send"></span> Giao hàng thành công</em>
+                  <em *ngIf="item.status=='Đã hủy'" style="color: #f75a00;"><span
+                      class="glyphicon glyphicon-send"></span> Giao hàng thất bại</em>
+                  |
+                  <em style="color: #d43f3a;">{{item.status}}</em>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div *ngFor="let itemP of item.order_detail" style="margin-bottom: 30px;">
+              <div class="row">
+                <div class="col-sm-2">
+                  <img src="http://localhost:8080/ede-file/get/image/{{
+                    itemP.productOption.product_option_images[0].image
+                  }}" height="90px" width="90px">
+                </div>
+                <div class="col-sm-8">
+                  <em style="font-size: 16px;">{{itemP.productOption.product.name}}</em><br>
+                  <em style="color: darkgrey;">Phân loại: {{itemP.productOption.display_name}}</em><br>
+                  <em>x{{itemP.quantity}}</em>
+                </div>
+                <div class="col-sm-2 row">
+                  <del *ngIf="itemP.productOption.price!=itemP.price" style="color: darkgrey; margin-right: 6px;">
+                    {{itemP.productOption.price | currency :'VND'}}</del>
+                  <em style="color: #d43f3a;">{{itemP.price | currency :'VND'}}</em>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5" style="margin-top: 15px;">
+                <span style="color: #d43f3a; margin-left: 50px;" class="glyphicon glyphicon-fire"></span> Tổng tiền: <em
+                  style="color: #d43f3a; font-size: 20px;">{{item.total_amount | currency :'VND'}}</em>
+                <br>
+                <input type="submit" class="btn btn-danger" value="Đánh giá"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px;">
+                <input type="submit" class="btn btn-danger" value="Liên hệ người bán"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px; margin-left: 20px;">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <div *ngFor="let item of listOrderFilter">
+          <div style="margin-bottom: 50px;margin-top: 20px; background-color:rgb(255, 254, 245); padding: 30px;">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-8">
+                <p>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 2px; margin-right: 6px;">Yêu
+                    thích+</em>
+                  <b style="margin-right: 6px;"> {{item.order_detail[0].productOption.product.shop.name}}</b>
+                  <em
+                    style="background-color: #d43f3a; color: #fff;border-radius: 2px; padding: 5px;margin-right: 8px;"><span
+                      class="glyphicon glyphicon-comment"></span> Chat</em>
+                  <em style="margin-right: 6px; border: 1px dimgray solid; padding: 5px;border-radius: 2px;"><span
+                      class="glyphicon glyphicon-calendar"></span> Xem shop</em>
+                </p>
+              </div>
+              <div class="col-sm-4">
+                <p>
+                  <em *ngIf="item.status=='Đã giao'" style="color: #26aa99;"><span
+                      class="glyphicon glyphicon-send"></span>
+                    Giao hàng thành công</em>
+                  <em *ngIf="item.status=='Đã hủy'" style="color: #f75a00;"><span
+                      class="glyphicon glyphicon-send"></span>
+                    Giao hàng thất bại</em>
+                  |
+                  <em style="color: #d43f3a;">{{item.status}}</em>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div *ngFor="let itemP of item.order_detail" style="margin-bottom: 30px;">
+              <div class="row">
+                <div class="col-sm-2">
+                  <img src="http://localhost:8080/ede-file/get/image/{{
+                          itemP.productOption.product_option_images[0].image
+                        }}" height="90px" width="90px">
+                </div>
+                <div class="col-sm-8">
+                  <em style="font-size: 16px;">{{itemP.productOption.product.name}}</em><br>
+                  <em style="color: darkgrey;">Phân loại: {{itemP.productOption.display_name}}</em><br>
+                  <em>x{{itemP.quantity}}</em>
+                </div>
+                <div class="col-sm-2 row">
+                  <del *ngIf="itemP.productOption.price!=itemP.price" style="color: darkgrey; margin-right: 6px;">
+                    {{itemP.productOption.price | currency :'VND'}}</del>
+                  <em style="color: #d43f3a;">{{itemP.price | currency :'VND'}}</em>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5" style="margin-top: 15px;">
+                <span style="color: #d43f3a; margin-left: 50px;" class="glyphicon glyphicon-fire"></span> Tổng tiền: <em
+                  style="color: #d43f3a; font-size: 20px;">{{item.total_amount | currency :'VND'}}</em>
+                <br>
+                <input type="submit" class="btn btn-danger" value="Hủy đơn"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px;"
+                  (click)="cancelOrder(item)">
+                <input type="submit" class="btn btn-danger" value="Liên hệ người bán"
+                  style="border-radius:4px 4px; width: 130px; height: 45px; margin-top: 14px; margin-left: 20px;">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--- Modal -->
+  <div class="modal fade bd-example-modal-lg" id="modalDanhGia" tabindex="-1" role="dialog"
+    aria-labelledby="modalDanhGiaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="modal-title" id="modalDanhGiaLabel" style="text-align: left">
+                Đánh giá sản phẩm
+              </h3>
+            </div>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br />
+        </div>
+        <div class="modal-body" [formGroup]="rating">
+          <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" formControlName="rate" />
+            <label for="star5" title="5 stars">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" formControlName="rate" />
+            <label for="star4" title="4 stars">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" formControlName="rate" />
+            <label for="star3" title="3 stars">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2" formControlName="rate" />
+            <label for="star2" title="2 stars">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1" formControlName="rate" />
+            <label for="star1" title="1 star">1 star</label>
+          </div>
+          <div>
+            <span>Nội dung đánh giá (nếu có):</span>
+            <textarea formControlName="content" class="form-control" rows="3"></textarea>
+          </div>
+          <div>Đính kèm:
+            <input id="files" type="file" name="files" class="form-control" multiple="multiple"
+              (change)="onFileChange($event)" accept=".png, .jpg, .jpeg" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            TRỞ LẠI
+          </button>
+          <button type="submit" [disabled]="rating.invalid ? 'disabled' : ''" class="btn btn-danger"
+            (click)="submitDanhGia()">
+            HOÀN THÀNH
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--- End Modal -->
+</div>

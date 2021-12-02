@@ -1,0 +1,153 @@
+<div class="col-sm-2">
+  <app-aside-shop></app-aside-shop>
+</div>
+<div class="col-sm-10" style="margin-top: 70px;">
+  <div>
+    <ul class="nav nav-tabs">
+      <li [ngClass]="activeTab == '1' ? 'active' : ''"><a data-toggle="tab" href="#home" (click)="activeTabPane('1')">
+          Quản lý thanh toán</a></li>
+      <li [ngClass]="activeTab == '2' ? 'active' : ''"><a data-toggle="tab" href="#menu1"
+          (click)="activeTabPane('2')">Danh sách</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+      <div id="home" [ngClass]="activeTab == '1' ? 'tab-pane fade in active' : 'tab-pane'">
+        <div class="main-container container">
+          <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-12">
+              <div class="row">
+                <form class="form-horizontal" [formGroup]="managePayment">
+                  <div class="form-group required">
+                    <label for="input-product" class="col-sm-2 control-label">Tên phương thức</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="input-product" placeholder="Tên phương thức"
+                        formControlName="name" />
+                      <div *ngIf="
+                            managePayment.controls['name'].invalid &&
+                            (managePayment.controls['name'].dirty ||
+                              managePayment.controls['name'].touched)
+                          " class="alert alert-danger">
+                        <span *ngIf="
+                            managePayment.controls['name'].errors &&
+                            managePayment.controls['name'].errors.required
+                          ">Tên phương thức là bắt buộc</span>
+                        <span *ngIf="
+                            managePayment.controls['name'].errors &&
+                            managePayment.controls['name'].errors.pattern
+                          ">Tên phương thức không đúng định dạng</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group required">
+                    <div formGroupName="detailTemp">
+                      <div formArrayName="options">
+                        <div *ngFor="let detail of managePayment.get('detailTemp.options').controls; let i = index">
+                          <div [formGroupName]="i">
+                            <label for="input-product" class="col-sm-2 control-label">Chi tiết</label>
+                            <div class="col-sm-8">
+                              <div class="input-group">
+                                <span class="input-group-addon">Thuộc tính</span>
+                                <input id="msg" type="text" class="form-control" name="msg"
+                                  placeholder="Ví dụ: Số tài khoản" formControlName="label">
+                                <span class="input-group-addon">Giá trị</span>
+                                <input id="msg" type="text" class="form-control" name="msg"
+                                  placeholder="Ví dụ: 08123884288123" formControlName="value">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <button (click)="addNewInputDetail()" type="button" id="button-product-attribute"
+                                data-toggle="tooltip" title="Thêm" class="btn btn-success"><i
+                                  class="fa fa-plus-circle"></i></button>
+                              <button (click)="removeInputDetail(detail)" type="button" id="button-product-attribute"
+                                data-toggle="tooltip" title="Xóa" class="btn btn-danger"><i
+                                  class="fa fa-trash-o"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="buttons clearfix">
+                    <div class="pull-right">
+                      <input
+                        [disabled]="managePayment.invalid ? 'disabled' : managePayment.controls.id.value != '' ? 'disabled' : null"
+                        type="submit" (click)="addNewPayment()" class="btn btn-success" value="Thêm" />
+                      <input [disabled]="managePayment.controls.id.value == '' ? 'disabled': null" type="submit"
+                        class="btn btn-primary" (click)="updatePayment()" value="Sửa" />
+                      <input [disabled]="managePayment.controls.id.value == '' ? 'disabled': null" type="submit"
+                        (click)="deletePayment()" class="btn btn-danger" value="Xóa" />
+                      <input type="submit" class="btn btn-secondary" value="Làm mới" (click)="resetForm()" />
+                    </div>
+                  </div>
+                </form>
+                <br>
+              </div>
+              <!--Middle Part End -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu1" [ngClass]="activeTab == '2' ? 'tab-pane fade in active' : 'tab-pane fade'">
+        <div class="row">
+          <!--Middle Part Start-->
+          <div id="content" class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form class="app-search d-none d-lg-block" style="margin-top: 15px;">
+                      <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." name="keywordEnableTrue"
+                          id="keywordEnableTrue" id="searchPayment" #searchPayment>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <input (click)="search(searchPayment.value)" type="submit" class="btn btn-danger" value="Tìm"
+                      style="border-radius:4px 4px; width: 76px; margin-top: 14px;">
+                    &nbsp;
+                  </div>
+                </div>
+              </div>
+            </div><br>
+            <br>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Tên phương thức</strong></td>
+                    <td><strong>Chi tiết</strong></td>
+                    <td><strong>Ngày tạo</strong></td>
+                    <td><strong>Trạng thái</strong></td>
+                    <td><strong>Hành động</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let payment of listAllPaymentShop| paginate: { itemsPerPage: 5, currentPage: p, totalItems: count };let i = index;">
+                    <td>{{payment.name}}</td>
+                    <td>{{payment.detail}}</td>
+                    <td>{{payment.createdate | date :'dd-MM-yyyy'}}</td>
+                    <td>{{payment.status ? 'Kích hoạt' : 'Không kích hoạt'}}</td>
+                    <td>
+                      <button (click)="editPayment(payment)" type="button" data-toggle="tooltip" title="edit"
+                        class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                      <button (click)="deletePaymentById(payment.id)" type="button" data-toggle="tooltip" title="remove"
+                        class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="col-sm-12" *ngIf="listAllPaymentShop.length > 0">
+                <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+              </div>
+            </div>
+          </div>
+          <!--Middle Part End -->
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,12 @@
+.limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}

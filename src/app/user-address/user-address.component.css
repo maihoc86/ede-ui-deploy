@@ -1,0 +1,81 @@
+h3 {
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+  text-transform: capitalize;
+}
+tr {
+  height: 30px;
+}
+.td-left {
+  text-align: left;
+  width: 600px;
+}
+
+.td-right {
+  text-align: right;
+}
+td {
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+span {
+  float: left;
+}
+.content-address-main {
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+.main-address {
+  display: inline-block;
+  background: rgb(0, 191, 165);
+  color: rgb(255, 255, 255);
+  border-radius: 3px;
+  padding: 3px 7px 2px;
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 500;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 12px;
+}
+.delivery-address {
+  display: inline-block;
+  color: rgb(238, 77, 45);
+  border: 1px solid rgb(238, 77, 45);
+  font-size: 11px;
+  font-weight: 400;
+  height: 22px;
+  padding: 0px 10px;
+  border-radius: 11px;
+  vertical-align: 2px;
+  line-height: 22px;
+  flex-shrink: 0;
+}
+.btn-transparent {
+  text-decoration: underline;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+.btn-add-address {
+  border-radius: 3px 3px;
+  width: 160px;
+  height: 35px;
+  margin: 20px auto;
+  text-align: center;
+}
+.btn-group {
+  width: 100%;
+}
+.dropdown-menu {
+  width: 100%;
+}
+
+.control-label {
+  float: left;
+}
